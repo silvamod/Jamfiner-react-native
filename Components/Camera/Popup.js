@@ -7,50 +7,62 @@ import AwesomeButton from "react-native-really-awesome-button";
 const Popup = () => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <CameraFC/>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-
-        {/* <Text style={styles.textStyle}>Show Modal</Text> */}
-        <AwesomeButton 
-        width={30} 
-        height={35}
-        onPress={() => setModalVisible(true)}
-        // style={styles.cambtn}
+    <>
+      <View style={styles.popup}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
         >
-        <Icon
-         name="camera"
-         size={30}
-        />
-        </AwesomeButton>
-    </View>
+          <View style={styles.popup} >
+            <View style={styles.modalView}>
+              <CameraFC/>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.textStyle}>Hide Modal</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+        </View>
+        <View style={styles.centeredView}>
+          {/* <Text style={styles.textStyle}>Show Modal</Text> */}
+          <AwesomeButton 
+          width={30} 
+          height={35}
+          onPress={() => setModalVisible(true)}
+          // style={styles.cambtn}
+          >
+          <Icon
+          name="camera"
+          size={30}
+          />
+          </AwesomeButton>
+      </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
+
+  popup:{
+    justifyContent:"center",
+    alignItems:"center"
+  },
+
   centeredView: {
+    position:'absolute',
+    top:"24.4%",
+    left:'90.6%',
     // flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
     //marginTop: 22
   },
   modalView: {
