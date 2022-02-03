@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import CameraFC from "./CameraFC";
+import Icon from 'react-native-vector-icons/Feather';
+import AwesomeButton from "react-native-really-awesome-button";
+
 const Popup = () => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -26,22 +29,29 @@ const Popup = () => {
           </View>
         </View>
       </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
+
+        {/* <Text style={styles.textStyle}>Show Modal</Text> */}
+        <AwesomeButton 
+        width={30} 
+        height={35}
         onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
+        // style={styles.cambtn}
+        >
+        <Icon
+         name="camera"
+         size={30}
+        />
+        </AwesomeButton>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   centeredView: {
-    flex: 1,
+    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    //marginTop: 22
   },
   modalView: {
     margin: 20,

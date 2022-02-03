@@ -11,21 +11,11 @@ export default function Profile(props) {
 
     <View style={styles.container}>
     <Image style={styles.image} source={{uri:"http://jillchloekenny.com/koken/storage/cache/images/000/027/Indian-Man,medium_large.2x.1428057054.jpg", width:'100%',height:200 }}/>
+    <Popup/>
       <View>
-        <AwesomeButton 
-        width={50} 
-        style={styles.cambtn}
-        onPress={()=>fireCameraPopUp()}
-        >
-        <Icon
-         name="camera"
-         size={40}
-        />
-        </AwesomeButton>
       </View>
       <Text style={styles.name}>Your Name</Text>
       <Text style={styles.bio}>Bio</Text>
-      <Popup/>
     </View>
     </>
   );
@@ -39,9 +29,9 @@ const styles = StyleSheet.create({
     //  justifyContent: 'center',
   },
   cambtn:{
-    position:'absolute',
-    bottom:5,
-    left:'85%'
+    // position:'absolute',
+    // bottom:5,
+    // left:'85%'
   },
   header:{
     marginTop:'10%',

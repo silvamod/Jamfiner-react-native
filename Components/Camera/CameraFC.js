@@ -6,7 +6,7 @@ export default function CameraFC() {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [camera, setCamera] = useState(null);
-  const [picUri, setPicUri] = useState('https://upload.wikimedia.org/wikipedia/commons/2/25/Coldplay_%282842037407%29.jpg');
+  const [picUri, setPicUri] = useState();
 
 
   useEffect(() => {
