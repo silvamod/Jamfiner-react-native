@@ -5,19 +5,23 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace JamfinderServer.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserController : ApiController
     {
 
         // GET api/<controller>/5
+        [HttpGet]
         public string Get(int id)
         {
             return "value";
         }
 
         // GET api/<controller>
+        [HttpGet]
         public IHttpActionResult Get()
         {
             try
@@ -33,6 +37,7 @@ namespace JamfinderServer.Controllers
             }
 
         }
+        [HttpGet]
         public IHttpActionResult Get(string email)
         {
             try

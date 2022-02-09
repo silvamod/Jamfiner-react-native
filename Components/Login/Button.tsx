@@ -10,10 +10,10 @@ export default function Button(props) {
         /** Do Something **/
         props.handleSignUp()
       }}
-      backgroundColor={'#fff'}
+      backgroundColor={'#1a1a1a'}
       width={250}
       backgroundDarker={'#191414'}
-      textColor={'#000'}
+      textColor={'#b1ff2e'}
       style={{marginTop:10}}
     >
       {props.label}

@@ -12,10 +12,15 @@
   "dependencies": {
     "@freakycoder/react-native-bounceable": "^0.2.5",
     "@freakycoder/react-native-header-view": "^1.2.0",
+    "@jesster2k10/react-native-range-slider": "^0.3.1",
     "@mui/icons-material": "^5.3.1",
+    "@react-native-async-storage/async-storage": "^1.15.17",
+    "@react-native-community/slider": "^4.2.0",
+    "@react-native-firebase/app": "^14.3.0",
     "expo": "~44.0.0",
     "expo-camera": "~12.1.0",
     "expo-linear-gradient": "~11.0.0",
+    "expo-location": "~14.0.1",
     "expo-status-bar": "~1.2.0",
     "firebase": "^8.2.3",
     "react": "17.0.1",
@@ -36,7 +41,9 @@
     "react-native-swipe-cards": "^0.1.1",
     "react-native-swipe-cards-deck": "^0.3.0",
     "react-native-textinput-effects": "^0.6.2",
-    "react-native-web": "0.17.1"
+    "react-native-web": "0.17.1",
+    "rn-range-slider": "^2.1.1",
+    "toggle-switch-react-native": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

@@ -1,11 +1,29 @@
-import { View, Text ,StyleSheet,Image,Button} from 'react-native';
+import { View, Text ,StyleSheet,Image} from 'react-native';
 import React from 'react';
-import { ProfileHeader } from "@freakycoder/react-native-header-view";
-import AwesomeButton from "react-native-really-awesome-button";
-import Icon from 'react-native-vector-icons/Feather';
 import Popup from '../Camera/Popup';
+import * as Location from 'expo-location';
+import { useEffect,useState } from 'react';
 
 export default function Profile(props) {
+
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => { //get loc
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location.coords.accuracy);
+     console.log(location)
+    })();
+  }, []);
+
+
   return (
     <>
 
@@ -14,9 +32,12 @@ export default function Profile(props) {
     <Popup/>
       <View>
       </View>
-      <Text style={styles.name}>Your Name</Text>
+      <Text style={styles.name}>{location}</Text>
+      <Text style={styles.name}>Your Name omer</Text>
       <Text style={styles.bio}>Bio</Text>
     </View>
+
+
     </>
   );
 }
@@ -25,7 +46,7 @@ const styles = StyleSheet.create({
   container: {
      flex: 1,
      alignItems: 'flex-start',
-     backgroundColor: '#1db954',
+     backgroundColor: '#fff',
     //  justifyContent: 'center',
   },
   cambtn:{

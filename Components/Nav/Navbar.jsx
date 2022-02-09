@@ -7,9 +7,12 @@ import { StyleSheet, View } from 'react-native';
 import Search from "../Search/Search";
 import Chat from "../Chat/Chat";
 import { ProfileHeader } from "@freakycoder/react-native-header-view";
+import { useState , useEffect} from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Tabs = AnimatedTabBarNavigator();
 //TODO:Make the profile open first
+//fetch to sql and get all user data
 
 export default (props) => (
 
@@ -17,12 +20,13 @@ export default (props) => (
 <>
 <View style={styles.header}>
 <ProfileHeader 
-titleText={props.username}
+titleText={'Welcome ' + props.username.split('@')[0]}
 disableFirstIcon={true}
 disableSecondIcon={true}
 //TODO:fetch/add img and name
 />
 </View>
+
   <Tabs.Navigator
     // default configuration from React Navigation
     tabBarOptions={{
@@ -36,7 +40,6 @@ disableSecondIcon={true}
         floating:true,
     }}
   >
-
 
     <Tabs.Screen
       name="Settings"
@@ -101,13 +104,18 @@ disableSecondIcon={true}
         )
       }}
     />
-
   </Tabs.Navigator>
   </>
 )
 
 
 const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#1db954',
+    justifyContent: 'center',
+  },
   tabs: {
      backgroundColor: '#000'
   },

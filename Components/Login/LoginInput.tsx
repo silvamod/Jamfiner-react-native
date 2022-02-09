@@ -15,6 +15,7 @@ export default function LoginInput(props) {
       props.set(text)
       console.log(text)
       }}
+      secureTextEntry={props.pass}
     />
   );
   
