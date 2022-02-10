@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet,Image, ImageBackground,Keyboard,TouchableWithoutFeedback} from 'react-native';
-import React, { useEffect,useState } from 'react';
+import { View,Image,Keyboard,TouchableWithoutFeedback} from 'react-native';
+import React, { useState } from 'react';
 // import styles from './Components/Login/Login.css';
 import AwesomeButton from "react-native-really-awesome-button";
 import  Button from "./Button";
