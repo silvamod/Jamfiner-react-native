@@ -8,6 +8,7 @@ export default function Profile(props) {
 
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [user, setUser] = useState()
 
   useEffect(() => { //get loc
     (async () => {
@@ -23,18 +24,38 @@ export default function Profile(props) {
     })();
   }, []);
 
-
+  useEffect(() => {
+    let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email='+props.username
+   fetch(apiUrl, {
+     method: 'GET',
+     headers: new Headers({
+       'Content-Type': 'application/json; charset=UTF-8',
+       'Accept': 'application/json; charset=UTF-8'
+     })
+   })
+     .then(res => {
+       return res.json()
+     })
+     .then(
+       (result) => {
+         console.log("fetch img= ", result);
+        setUser(result)
+       },
+       (error) => {
+         console.log("err get=", error);
+       });
+ }, []);
   return (
     <>
 
     <View style={styles.container}>
-    <Image style={styles.image} source={{uri:"http://jillchloekenny.com/koken/storage/cache/images/000/027/Indian-Man,medium_large.2x.1428057054.jpg", width:'100%',height:200 }}/>
+    <Image style={styles.image} source={{uri:user.img, width:'100%',height:200 }}/>
     <Popup/>
       <View>
       </View>
       <Text style={styles.name}>{location}</Text>
-      <Text style={styles.name}>Your Name omer</Text>
-      <Text style={styles.bio}>Bio</Text>
+      <Text style={styles.name}>{user.email.split('@')[0]}</Text>
+      <Text style={styles.bio}>Bio:{user.bio}]</Text>
     </View>
 
 

@@ -85,7 +85,7 @@ export default function Settings() {
         minimumValue={0}
         maximumValue={300}
         minimumTrackTintColor="#000"
-        maximumTrackTintColor="#000000"
+        maximumTrackTintColor="#fff"
         thumbTintColor='#000'
         onValueChange={(val)=>{setMiles(val)}}
         step={1}
@@ -97,7 +97,7 @@ export default function Settings() {
         minimumValue={0}
         maximumValue={4}
         minimumTrackTintColor="#000"
-        maximumTrackTintColor="#000000"
+        maximumTrackTintColor="#fff"
         thumbTintColor='#000'
         onValueChange={(val)=>{setSkill(val)}}
         step={1}
@@ -106,7 +106,7 @@ export default function Settings() {
   <ToggleSwitch
     isOn={male}
     label="Male   "
-    labelStyle={{ color: "black", fontWeight: "900"}}
+    labelStyle={{ color: "black", fontWeight: "300"}}
     onToggle={()=>{setMale(!male)}}
   />
 </View>
@@ -115,7 +115,7 @@ export default function Settings() {
 <ToggleSwitch
     isOn={female}
     label="Female"
-    labelStyle={{ color: "black", fontWeight: "900" }}
+    labelStyle={{ color: "black", fontWeight: "300" }}
     onToggle={()=>{setFemale(!female)}}
 />
 

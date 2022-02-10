@@ -14,6 +14,8 @@ const Tabs = AnimatedTabBarNavigator();
 //TODO:Make the profile open first
 //fetch to sql and get all user data
 
+
+
 export default (props) => (
 
 
