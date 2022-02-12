@@ -11,10 +11,11 @@ export default function Button(props) {
         props.handleSignUp()
       }}
       backgroundColor={'#1a1a1a'}
-      width={250}
+      width={props.size}
       backgroundDarker={'#191414'}
       textColor={'#b1ff2e'}
       style={{marginTop:10}}
+      
     >
       {props.label}
     </AwesomeButton>

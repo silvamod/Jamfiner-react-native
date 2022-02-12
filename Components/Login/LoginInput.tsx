@@ -1,27 +1,34 @@
 import { View, Text } from 'react-native';
-import React from 'react';
-import {Madoka}  from 'react-native-textinput-effects';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Hideo } from 'react-native-textinput-effects';
+import React from "react";
+import { SafeAreaView, StyleSheet, TextInput } from "react-native";
 
-export default function LoginInput(props) {
-  const madokaInput = (
-    <Madoka
-      label={props.lable}
-      // this is used as active and passive border color
-      borderColor={'#000'}
-      inputPadding={16}
-      labelStyle={{ color: '#000' }}
-      inputStyle={{ color: '#000', }}
-      onChangeText={(text)=>{
-      props.set(text)
-      console.log(text)
-      }}
-      secureTextEntry={props.pass}
-    />
-  );
-  
+export default function LoginInput(props) {  
+
   return (
    <>
-      {madokaInput}
+      <TextInput
+        style={styles.input}
+        placeholder={props.lable}
+        onChangeText={(text)=>{
+          props.set(text)
+          console.log(text)
+          }}
+      />
+
     </>
       );
 }
+
+
+const styles = StyleSheet.create({
+  input: {
+    direction:'ltr',
+    height: 55,
+    margin: 12,
+    borderWidth: 2,
+    padding: 10,
+    borderRadius:5,
+  },
+});

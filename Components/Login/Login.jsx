@@ -1,12 +1,11 @@
-import { View,Image,Keyboard,TouchableWithoutFeedback} from 'react-native';
+import { View,Image,Keyboard,TouchableWithoutFeedback,Text,Button} from 'react-native';
 import React, { useState } from 'react';
 // import styles from './Components/Login/Login.css';
 import AwesomeButton from "react-native-really-awesome-button";
-import  Button from "./Button";
+import  MyButton from "./Button";
 import LoginInput from './LoginInput';
 import { auth } from '../DataBaseSDK/firebaseSDK'
-import { LinearGradient } from 'expo-linear-gradient';
-
+import LoginWave from '../SVG/loginwave';
 
 export default function Login(props) {
   const [email, setEmail] = useState('');
@@ -38,7 +37,6 @@ export default function Login(props) {
   }
   return (
     
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <>
     <View>
     <Image style={{width:400,height:100,marginTop:100}} source={require('../../assets/images/logo-removebg-preview__3_-removebg-preview.png')}/>
@@ -46,13 +44,13 @@ export default function Login(props) {
     <View style={{marginTop:100}}>
           <LoginInput lable={'Email'} set={setEmail}/>
           <LoginInput lable={'Password'} pass={true} set={setPassword}/>
-          <Button label={'Login'} handleSignUp={handleLogin}/>
-          <Button label={'Register'} handleSignUp={handleSignUp}/>
-
+          <MyButton label={'Login'} size={250}handleSignUp={handleLogin}/>
+    </View>
+    <View style={{flex:1,justifyContent:'flex-end',marginBottom:40}}>
+      <Text>Dont have an account? </Text>
+      <MyButton label={'Register'}size={100} handleSignUp={handleSignUp}/>
     </View>
     </>
-    </TouchableWithoutFeedback>
-    
   );
 }
 
