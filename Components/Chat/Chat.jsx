@@ -23,13 +23,14 @@ export default function Chat() {
   //   ])
   // }, [])
   useLayoutEffect(() => {
-    const unsubscribe = db.collection('chats').orderBy('createdAt'
+    const unsubscribe = db.collection('chen@gmail.com').orderBy('createdAt'
     ,'desc').onSnapshot(snapshot=>setMessages(
-      snapshot.docs.map(doc=> ({
+      snapshot.docs.map(doc => ({
         _id:doc.data()._id,
         createdAt:doc.data().createdAt.toDate(),
         text:doc.data().text,
-        user:doc.data().user
+        user:doc.data().user,
+        to:'kfirg@gmail.com'
       }))
     ))
     return unsubscribe;
@@ -44,13 +45,22 @@ export default function Chat() {
       _id,
       createdAt,
       text,
-      user
+      user,
+      to
     }=messages[0]
-    db.collection('chats').add({
+    db.collection('chen@gmail.com').add({
       _id,
       createdAt,
       text,
-      user
+      user,
+      to:'kfirg@gmail.com'
+    })
+    db.collection('kfirg@gmail.com').add({
+      _id,
+      createdAt,
+      text,
+      user,
+      to:'kfirg@gmail.com'
     })
   }, [])
 

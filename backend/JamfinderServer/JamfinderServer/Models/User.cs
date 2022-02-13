@@ -44,6 +44,140 @@ namespace JamfinderServer.Models
         }
 
 
+        public int checkMatch(string user, string targetUser)
+        {
+            SqlConnection con = null;
+            User User = new User();
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "select * from likes where _user = '"+ targetUser+"' AND target = '"+ user+"'";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+
+                // get a reader
+                SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+                if (dr.Read())
+                {
+                    return 1;
+                }
+                return 0;
+
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
+
+        }
+        public List<String> getMatches(string targetUser)
+        {
+            SqlConnection con = null;
+            List<String> UserList = new List<String>();
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "SELECT * from matches WHERE user1 = '" +targetUser +"'";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+
+                // get a reader
+                SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+
+                while (dr.Read())
+                {   // Read till the end of the data into a 
+                    UserList.Add((string)dr["user2"]);
+                }
+                //TODO: Print result
+                return UserList;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
+
+        }
+
+        public int addMatch(string match1, string match2)
+        {
+            SqlConnection con = null;
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "INSERT INTO matches (user1,user2) VALUES ('" + match1 + "','" + match2 + "') " +
+                    "INSERT INTO matches (user1,user2) VALUES ('" + match2 + "','" + match1 + "') ";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+                // get a reader
+                cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
+
+            
+        }
+        public void addLike(string user, string targetUser)
+        {
+            SqlConnection con = null;
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "INSERT INTO likes (_user,target) VALUES ('" + user +"','"  +targetUser + "')" ;
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+                // get a reader
+                cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
+        }
+
+
         public User getUser(string email)
         {
             SqlConnection con = null;
@@ -87,7 +221,7 @@ namespace JamfinderServer.Models
             }
 
         }
-
+   
         public List<User> getUsers()
         {
             SqlConnection con = null;

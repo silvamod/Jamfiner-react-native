@@ -61,7 +61,7 @@ disableSecondIcon={true}
 
 <Tabs.Screen
       name="Search"
-      component={Search}
+      children={()=><Search username={props.username}/>}
       options={{
         tabBarIcon: ({ focused, color, size }) => (
             <Icon

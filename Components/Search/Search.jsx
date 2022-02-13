@@ -25,32 +25,90 @@ function StatusCard({ text }) {
     );
   }
 
-export default function Search() {
+export default function Search(props) {
     const [cards, setCards] = useState();
     const likebtn = useRef()
-    // replace with real remote data fetching
     useEffect(() => {
-      setTimeout(() => {
-        setCards([
-          { name: "Omer",bio:'stamstamstamstamstamstamstamstamstamstamstamstamstamstamstamstamstamstam',image:'https://i.pinimg.com/564x/e8/e6/7a/e8e67ac7701300ff988c3cf560e5f0ee.jpg' },
-          { name: "Omer",bio:'stam',image:'https://i.pinimg.com/564x/e8/e6/7a/e8e67ac7701300ff988c3cf560e5f0ee.jpg' },
-          { text: "Blueberry", backgroundColor: "blue" },
-          { text: "Umm...", backgroundColor: "cyan" },
-          { text: "orange", backgroundColor: "orange" },
-        ]);
-      }, 500);
-    }, []);
+      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user'
+     fetch(apiUrl, {
+       method: 'GET',
+       headers: new Headers({
+         'Content-Type': 'application/json; charset=UTF-8',
+         'Accept': 'application/json; charset=UTF-8'
+       })
+     })
+       .then(res => {
+         return res.json()
+       })
+       .then(
+         (result) => {
+           const userCards = []
+           result.map(user => {
+              userCards.push({ name: user.name,bio:user.bio,image:user.img ,email:user.email})
+           }) 
+           setCards(userCards)
+          // setUser(result)
+         },
+         (error) => {
+           console.log("err get=", error);
+         });
+   }, []);
   
+  
+    function postMatch(user, targetUser){
+      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?match1='+user+'&match2='+targetUser
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json; charset=UTF-8'
+        })
+      })
+        .then(res => {
+          return res.json()
+        })
+        .then(
+          (result) => {
+           console.log(result)
+           
+          },
+          (error) => {
+            console.log("err get=", error);
+          });
+    }
+
+
     function handleYup(card) {
-      console.log(`Yup for ${card.text}`);
+      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?user='+props.username+'&targetUser='+card.email
+      console.log(apiUrl)
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json; charset=UTF-8'
+        })
+      })
+        .then(res => {
+          return res.json()
+        })
+        .then(
+          (result) => {
+            if(result == 1){ //MATCH!!$!!
+              postMatch(props.username, card.email)
+            }
+          },
+          (error) => {
+            console.log("err get=", error);
+          });
       return true; // return false if you wish to cancel the action
     }
+    
     function handleNope(card) {
-      console.log(`Nope for ${card.text}`);
+     
       return true;
     }
     function handleMaybe(card) {
-      console.log(`Maybe for ${card.text}`);
+     
       return true;
     }
   
@@ -62,7 +120,7 @@ export default function Search() {
             cards={cards}
             renderCard={(cardData) => <Card data={cardData} />}
             keyExtractor={(cardData) => String(cardData.text)}
-            renderNoMoreCards={() => <StatusCard text="No more cards..." />}
+            renderNoMoreCards={() => <StatusCard text="No more people..." />}
             actions={{
               nope: { onAction: handleNope ,show:true,containerStyle:{marginBottom:300,marginLeft:230}},
               yup: { onAction: handleYup ,show:true,containerStyle:{marginBottom:300}},
@@ -70,7 +128,7 @@ export default function Search() {
               showYup:false,
             }}
             hasMaybeAction={false}
-            loop={true}
+            loop={false}
             
             // If you want a stack of cards instead of one-per-one view, activate stack mode
             // stack={true}

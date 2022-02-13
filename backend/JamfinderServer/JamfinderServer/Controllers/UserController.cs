@@ -54,10 +54,29 @@ namespace JamfinderServer.Controllers
 
         }
 
-        // POST api/<controller>
-        public void Post([FromBody] string value)
+        public IHttpActionResult GetMatches(string targetUser)
         {
+            User User = new User();
+            List<String> a = User.getMatches(targetUser);
+            return Ok(a);
+
         }
+
+
+        public IHttpActionResult PostMatch(string match1, string match2)
+        {
+            User User = new User();
+            return Ok(User.addMatch(match1, match2));
+        }
+
+        // POST api/<controller>
+        public IHttpActionResult PostLike(string user, string targetUser)
+        {
+            User User = new User();
+            User.addLike(user, targetUser);
+            return Ok(User.checkMatch(user, targetUser));
+        }
+
 
         // PUT api/<controller>/5
         public void Put(int id, [FromBody] string value)
