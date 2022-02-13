@@ -54,6 +54,14 @@ namespace JamfinderServer.Controllers
 
         }
 
+        
+        public IHttpActionResult GetLikes(string userLike)
+        {
+            User User = new User();
+            List<String> likes = User.getLikes(userLike);
+            return Ok(likes);
+        }
+
         public IHttpActionResult GetMatches(string targetUser)
         {
             User User = new User();

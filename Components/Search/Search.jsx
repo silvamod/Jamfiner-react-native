@@ -27,7 +27,31 @@ function StatusCard({ text }) {
 
 export default function Search(props) {
     const [cards, setCards] = useState();
+    const [likes, setLikes] = useState();
     const likebtn = useRef()
+
+    useEffect(() => {
+      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?userLike=' + props.username
+      fetch(apiUrl, {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json; charset=UTF-8'
+        })
+      })
+        .then(res => {
+          return res.json()
+        })
+        .then(
+          (result) => {
+            setLikes(result)
+            }) 
+          ,
+          (error) => {
+            console.log("err get=", error);
+          };
+   }, []);
+
     useEffect(() => {
       let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user'
      fetch(apiUrl, {
@@ -44,16 +68,46 @@ export default function Search(props) {
          (result) => {
            const userCards = []
            result.map(user => {
-              userCards.push({ name: user.name,bio:user.bio,image:user.img ,email:user.email})
+             if(user.email != props.username  & !likes.includes(user.email)){
+                userCards.push({ name: user.name,bio:user.bio,image:user.img ,email:user.email})
+             }
            }) 
+
+           for (let i = userCards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [userCards[i], userCards[j]] = [userCards[j], userCards[i]];
+        }
            setCards(userCards)
           // setUser(result)
          },
          (error) => {
            console.log("err get=", error);
          });
-   }, []);
+   }, [likes]);
   
+function getLikes(){
+  let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?userLike=' + props.username
+  fetch(apiUrl, {
+    method: 'GET',
+    headers: new Headers({
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json; charset=UTF-8'
+    })
+  })
+    .then(res => {
+      return res.json()
+    })
+    .then(
+      (result) => {
+        console.log(result)
+        return result
+        }) 
+      ,
+      (error) => {
+        console.log("err get=", error);
+      };
+}
+
   
     function postMatch(user, targetUser){
       let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?match1='+user+'&match2='+targetUser
@@ -137,7 +191,7 @@ export default function Search(props) {
           </SwipeCards>
 
         ) : (
-          <StatusCard text="Loading..." />
+          <StatusCard text="No more people..." />
         )}
         <View style={styles.btnContainer}>
         {/* <Button title='Yup' onPress={()=>likebtn.swipeYup()}></Button>

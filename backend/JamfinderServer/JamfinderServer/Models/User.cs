@@ -178,6 +178,46 @@ namespace JamfinderServer.Models
         }
 
 
+        public List<String> getLikes(string email) // returns like table for requested user.
+        {
+            SqlConnection con = null;
+            List<String> likes = new List<String>();
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "SELECT target from likes where _user = '" + email + "'";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+
+                // get a reader
+                SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+                User user = new User(); ;
+                while (dr.Read())
+                {   // Read till the end of the data into a row
+                    likes.Add((string)dr["target"]);
+                
+                }
+                //TODO: Print result
+                return likes;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
+
+        }
+
+
         public User getUser(string email)
         {
             SqlConnection con = null;
