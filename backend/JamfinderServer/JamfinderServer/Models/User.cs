@@ -80,24 +80,31 @@ namespace JamfinderServer.Models
             }
 
         }
-        public List<String> getMatches(string targetUser)
+        public List<User> getMatches(string targetUser)
         {
             SqlConnection con = null;
-            List<String> UserList = new List<String>();
+            List<User> UserList = new List<User>();
 
-            try
-            {
+            try{
                 con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
 
-                String selectSTR = "SELECT * from matches WHERE user1 = '" +targetUser +"'";
+                String selectSTR = "SELECT  * FROM Users INNER JOIN(SELECT user2 from matches WHERE user1 = '"+targetUser+"') AS a ON Users.email = a.user2";
                 SqlCommand cmd = new SqlCommand(selectSTR, con);
-
+               
                 // get a reader
                 SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
 
                 while (dr.Read())
                 {   // Read till the end of the data into a 
-                    UserList.Add((string)dr["user2"]);
+                    User user = new User();
+                    user.email = (string)dr["email"];
+                    user.name = (string)dr["username"];
+                    user.profession = (string)dr["profession"];
+                    user.experience = (int)dr["experience"];
+                    user.location = (string)dr["location"];
+                    user.bio = (string)dr["bio"];
+                    user.img = (string)dr["img"];
+                    UserList.Add(user);
                 }
                 //TODO: Print result
                 return UserList;

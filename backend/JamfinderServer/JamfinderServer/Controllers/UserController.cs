@@ -65,7 +65,7 @@ namespace JamfinderServer.Controllers
         public IHttpActionResult GetMatches(string targetUser)
         {
             User User = new User();
-            List<String> a = User.getMatches(targetUser);
+            List<User> a = User.getMatches(targetUser);
             return Ok(a);
 
         }
