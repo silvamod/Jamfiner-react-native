@@ -15,6 +15,7 @@ export default function LoginInput(props) {
           props.set(text)
           console.log(text)
           }}
+          secureTextEntry={props.pass}
       />
 
     </>
@@ -30,5 +31,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 10,
     borderRadius:5,
+    maxWidth:'55%'
   },
 });

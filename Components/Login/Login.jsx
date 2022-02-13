@@ -6,7 +6,7 @@ import  MyButton from "./Button";
 import LoginInput from './LoginInput';
 import { auth } from '../DataBaseSDK/firebaseSDK'
 import LoginWave from '../SVG/loginwave';
-
+import SingUp from './SingUp'
 export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -46,10 +46,12 @@ export default function Login(props) {
           <LoginInput lable={'Password'} pass={true} set={setPassword}/>
           <MyButton label={'Login'} size={250}handleSignUp={handleLogin}/>
     </View>
-    <View style={{flex:1,justifyContent:'flex-end',marginBottom:40}}>
-      <Text>Dont have an account? </Text>
-      <MyButton label={'Register'}size={100} handleSignUp={handleSignUp}/>
+    <View style={{flex:1,justifyContent:'center',marginBottom:40}}>
+    <SingUp upDateUserName={props.upDateUserName} userAuthOK={props.userAuthOK} handleSignUp={handleSignUp}/>
+      <Text>Dont have an account?</Text>
     </View>
+
+
     </>
   );
 }
