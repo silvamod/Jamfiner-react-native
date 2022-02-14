@@ -9,7 +9,7 @@ import Chat from "../Chat/Chat";
 import { ProfileHeader } from "@freakycoder/react-native-header-view";
 import { useState , useEffect} from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import ChatLs from "../Chat/ChatLs";
+import ChatNav from "../Chat/ChatNav";
 
 const Tabs = AnimatedTabBarNavigator();
 //TODO:Make the profile open first
@@ -18,7 +18,6 @@ const Tabs = AnimatedTabBarNavigator();
 
 
 export default (props) => (
-
 
 <>
 <View style={styles.header}>
@@ -75,10 +74,9 @@ disableSecondIcon={true}
         )
       }}
     />
-
 <Tabs.Screen
       name="Chat"
-      component={ChatLs}
+      children={()=><ChatNav username={props.username}/>}
       options={{
         tabBarIcon: ({ focused, color, size }) => (
             <Icon
