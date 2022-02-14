@@ -5,7 +5,7 @@ import { auth, db } from '../DataBaseSDK/firebaseSDK';
 
 
 
-export default function Chat() {
+export default function Chat(props) {
   const [messages, setMessages] = useState([]);
 
   // useEffect(() => {
@@ -23,14 +23,18 @@ export default function Chat() {
   //   ])
   // }, [])
   useLayoutEffect(() => {
-    const unsubscribe = db.collection('kfirg@gmail.com').orderBy('createdAt'
+    console.log("user: "+ props.route.params.user)
+    console.log("target user: "+props.route.params.targetuser)
+
+
+    const unsubscribe = db.collection(props.route.params.targetuser).orderBy('createdAt'
     ,'desc').onSnapshot(snapshot=>setMessages(
       snapshot.docs.map(doc => ({
         _id:doc.data()._id,
         createdAt:doc.data().createdAt.toDate(),
         text:doc.data().text,
         user:doc.data().user,
-        to:'kfirg@gmail.com'
+        to:props.route.params.targetuser
       }))
     ))
     return unsubscribe;
@@ -48,19 +52,19 @@ export default function Chat() {
       user,
       to
     }=messages[0]
-    db.collection('chen@gmail.com').add({
+    db.collection(props.route.params.user).add({
       _id,
       createdAt,
       text,
       user,
-      to:'chen@gmail.com'
+      to:props.route.params.user
     })   
-       db.collection('kfirg@gmail.com').add({
+       db.collection(props.route.params.targetuser).add({
       _id,
       createdAt,
       text,
       user,
-      to:'chen@gmail.com'
+      to:props.route.params.user
     })
   }, [])
 

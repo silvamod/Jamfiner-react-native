@@ -7,9 +7,21 @@ import LoginInput from './LoginInput';
 import { auth } from '../DataBaseSDK/firebaseSDK'
 import LoginWave from '../SVG/loginwave';
 import SingUp from './SingUp'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+
+    const storeData = async (value) => {
+      try {
+        await AsyncStorage.setItem('@email', value)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  
 
   const handleSignUp = () => {
     auth
@@ -31,8 +43,9 @@ export default function Login(props) {
         // console. log('Logged in with:', user.email);
         props.upDateUserName(user.email)
         props.userAuthOK(0) //Switch to the main page
-
+        storeData(email)
       })
+
       .catch(error => alert(error.message)) //TODO:my own alert
   }
   return (
