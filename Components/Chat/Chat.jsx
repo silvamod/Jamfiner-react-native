@@ -27,15 +27,19 @@ export default function Chat(props) {
     console.log("target user: "+props.route.params.targetuser)
 
 
-    const unsubscribe = db.collection(props.route.params.targetuser).orderBy('createdAt'
+    const unsubscribe = db.collection(props.route.params.user + "-" + props.route.params.targetuser).orderBy('createdAt'
     ,'desc').onSnapshot(snapshot=>setMessages(
-      snapshot.docs.map(doc => ({
+      snapshot.docs.map(doc => (
+        {
         _id:doc.data()._id,
         createdAt:doc.data().createdAt.toDate(),
         text:doc.data().text,
         user:doc.data().user,
-        to:props.route.params.targetuser
-      }))
+        from:doc.data().from,
+        to:doc.data().to
+      }
+        )
+      )
     ))
     return unsubscribe;
   },[])
@@ -50,20 +54,23 @@ export default function Chat(props) {
       createdAt,
       text,
       user,
+      from,
       to
     }=messages[0]
-    db.collection(props.route.params.user).add({
+    db.collection(props.route.params.user + "-" + props.route.params.targetuser).add({
       _id,
       createdAt,
       text,
       user,
-      to:props.route.params.user
+      from:props.route.params.user,
+      to:props.route.params.targetuser
     })   
-       db.collection(props.route.params.targetuser).add({
+       db.collection( props.route.params.targetuser + "-" + props.route.params.user ).add({
       _id,
       createdAt,
       text,
       user,
+      from:props.route.params.targetuser,
       to:props.route.params.user
     })
   }, [])

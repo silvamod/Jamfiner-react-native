@@ -97,7 +97,7 @@ export default function ChatLs(props) {
       const value = await AsyncStorage.getItem('@email')
       if(value !== null) {
         // value previously stored
-        setemail(value)
+        setemail(value.toLowerCase())
       }
     } catch(e) {
       // error reading value
