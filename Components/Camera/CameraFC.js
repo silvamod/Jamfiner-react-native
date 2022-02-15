@@ -10,11 +10,12 @@ export default function CameraFC() {
 
 
   const imageUpload = (imgUri) => {
-    let urlAPI = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/uploadpicture';
-if(imgUri){
+    let urlAPI = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/uploadpicture';
+    console.log('uploading ..')
+  console.log(imgUri)
     let dataI = new FormData();
     dataI.append('picture', {
-      uri: imgUri,
+      uri:  'https://upload.wikimedia.org/wikipedia/commons/2/25/Coldplay_%282842037407%29.jpg',
       name: "stam",
       type: 'image/jpg'
     });
@@ -33,8 +34,44 @@ if(imgUri){
         console.log(responseData);
       })
       .catch(err => { alert('err upload= ' + err); });
-  }
+  
 }
+useEffect(() => {
+  imageUpload('https://upload.wikimedia.org/wikipedia/commons/2/25/Coldplay_%282842037407%29.jpg')
+
+
+}, [])
+
+
+
+useEffect(() => {
+  let urlAPI = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/uploadpicture';
+  if(picUri){
+    console.log(picUri)
+      let dataI = new FormData();
+      dataI.append('picture', {
+        uri: picUri,
+        name: "stam",
+        type: 'image/jpg'
+      });
+  
+      const config = {
+        method: 'POST',
+        body: dataI,
+      }
+  
+      fetch(urlAPI, config)
+        .then((res) => {
+          if (res.status == 201) { return res.json(); }
+          else { return "err"; }
+        })
+        .then((responseData) => {
+          console.log(responseData);
+        })
+        .catch(err => { alert('err upload= ' + err); });
+    }
+  
+}, [picUri])
 
 
 
@@ -74,7 +111,7 @@ if(imgUri){
             onPress={async () => {
               if (camera) {
                 const data = await camera.takePictureAsync(null);
-                console.log(data.uri)
+                // console.log(data.uri)
                 setPicUri(data.uri);
                 imageUpload(picUri)
               }
