@@ -45,6 +45,7 @@ export default function Profile(props) {
          console.log("err get=", error);
        });
  }, []);
+ if(user){
   return (
     <>
 
@@ -60,7 +61,10 @@ export default function Profile(props) {
 
 
     </>
-  );
+  )}
+  return (<View><Text>Loading ..</Text></View>)
+  
+  ;
 }
 
 const styles = StyleSheet.create({

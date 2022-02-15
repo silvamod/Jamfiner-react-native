@@ -70,15 +70,17 @@ export default function Chat(props) {
       createdAt,
       text,
       user,
-      from:props.route.params.targetuser,
-      to:props.route.params.user
+      from:props.route.params.user,
+      to:props.route.params.targetuser
     })
   }, [])
 
 
 
   return (
+    <View style={styles.container}>
     <GiftedChat
+
     messages={messages}
     showAvatarForEveryMessage={true}
     onSend={messages => onSend(messages)}
@@ -86,15 +88,14 @@ export default function Chat(props) {
       _id: auth?.currentUser?.email,
     }}
   />
+  </View>
   );
 }
 
 const styles = StyleSheet.create({
     container: {
-       flex: 1,
-       alignItems: 'center',
-       backgroundColor: '#1db954',
-       justifyContent: 'center',
+       flex: 0.85,
+
     },
     header:{
       marginTop:'7%',

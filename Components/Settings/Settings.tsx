@@ -57,10 +57,6 @@ export default function Settings() {
   }
 
   return (
-
-
-
-   
     <View style={styles.container}>
     <View style={styles.multiselectdemocontainer}>
       <Text style={{ fontSize: 20, paddingBottom: 10 }}>Instruments</Text>

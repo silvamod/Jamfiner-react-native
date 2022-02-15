@@ -1,5 +1,5 @@
 import { Box, FlatList, Heading, Avatar, HStack, VStack, Text, Spacer, Center, NativeBaseProvider } from "native-base";
-import { Pressable } from "react-native";
+import { Pressable,View } from "react-native";
 import React, {useEffect, useContext, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -47,7 +47,7 @@ if(props.data){
 
 }
 
-return <></>
+return <View><Text>Loading ..</Text></View>
 
   // const data = [{
   //   id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba", // email here
