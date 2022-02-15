@@ -30,6 +30,7 @@
     "react-awesome-button": "^6.5.1",
     "react-chat-elements": "^10.16.2",
     "react-dom": "17.0.1",
+    "react-geocode": "^0.2.3",
     "react-native": "0.64.3",
     "react-native-animated-nav-tab-bar": "^3.1.7",
     "react-native-apple-header": "^0.1.1",
