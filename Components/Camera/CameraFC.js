@@ -15,8 +15,8 @@ export default function CameraFC() {
   console.log(imgUri)
     let dataI = new FormData();
     dataI.append('picture', {
-      uri:  'https://upload.wikimedia.org/wikipedia/commons/2/25/Coldplay_%282842037407%29.jpg',
-      name: "stam",
+      uri:  imgUri,
+      name: "stam54.jpg",
       type: 'image/jpg'
     });
 
@@ -36,41 +36,11 @@ export default function CameraFC() {
       .catch(err => { alert('err upload= ' + err); });
   
 }
-useEffect(() => {
-  imageUpload('https://upload.wikimedia.org/wikipedia/commons/2/25/Coldplay_%282842037407%29.jpg')
-
-
-}, [])
-
-
 
 useEffect(() => {
-  let urlAPI = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/uploadpicture';
   if(picUri){
-    console.log(picUri)
-      let dataI = new FormData();
-      dataI.append('picture', {
-        uri: picUri,
-        name: "stam",
-        type: 'image/jpg'
-      });
-  
-      const config = {
-        method: 'POST',
-        body: dataI,
-      }
-  
-      fetch(urlAPI, config)
-        .then((res) => {
-          if (res.status == 201) { return res.json(); }
-          else { return res.status; }
-        })
-        .then((responseData) => {
-          console.log(responseData);
-        })
-        .catch(err => { alert('err upload= ' + err); });
+    imageUpload(picUri)
     }
-  
 }, [picUri])
 
 
@@ -112,8 +82,8 @@ useEffect(() => {
               if (camera) {
                 const data = await camera.takePictureAsync(null);
                 // console.log(data.uri)
-                setPicUri(data.uri);
-                imageUpload(picUri)
+                setPicUri(data.uri); //after it sets goes to useeffect on picuri
+              
               }
 
             }}>

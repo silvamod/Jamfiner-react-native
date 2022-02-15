@@ -106,7 +106,7 @@ namespace JamfinderServer.Controllers
                             outputForNir += " ---here2=" + name;
 
                             //need the guid because in react native in order to refresh an inamge it has to have a new name
-                            string newFileName = Path.GetFileNameWithoutExtension(name) + "_" + CreateDateTimeWithValidChars() + Path.GetExtension(name);
+                            string newFileName = Path.GetFileNameWithoutExtension(name) + Path.GetExtension(name);
                             //string newFileName = Path.GetFileNameWithoutExtension(name) + "_" + Guid.NewGuid() + Path.GetExtension(name);
                             //string newFileName = name + "" + Guid.NewGuid();
                             outputForNir += " ---here3" + newFileName;
@@ -146,9 +146,6 @@ namespace JamfinderServer.Controllers
             return task;
         }
 
-        private string CreateDateTimeWithValidChars()
-        {
-            return DateTime.Now.ToString().Replace('/', '_').Replace(':', '-').Replace(' ', '_');
-        }
+    
     }
 }

@@ -6,9 +6,54 @@ import { useEffect,useState } from 'react';
 
 export default function Profile(props) {
 
-  const [location, setLocation] = useState(null);
+  const [locationAl, setLocationAl] = useState(null);
+  const [locationLo, setLocationLo] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [user, setUser] = useState()
+
+
+  useEffect(() => {
+    if(locationLo){
+     
+        fetch(`https://trueway-geocoding.p.rapidapi.com/ReverseGeocode?location=${locationAl}%2C${locationLo}&language=en`, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "trueway-geocoding.p.rapidapi.com",
+            "x-rapidapi-key": "d85f0fed1fmsh53f3a83ff8795bep19a5ddjsne5d81d4265ee"
+        }
+
+    }).then(response => {
+      console.log("haaaa");
+        console.log(response.results[0]);
+        console.log("haaaa2");
+    })
+    .catch(err => {
+        console.error(err);
+    });
+    }
+  }, [locationLo])
+  
+
+  function locationToCity(location){
+    if(location){
+      console.log(location.coords.langtitude)
+        fetch(`https://trueway-geocoding.p.rapidapi.com/ReverseGeocode?location=${location.coords.langtitude}%2C${location.coords.latitude}&language=en`, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "trueway-geocoding.p.rapidapi.com",
+            "x-rapidapi-key": "d85f0fed1fmsh53f3a83ff8795bep19a5ddjsne5d81d4265ee"
+        }
+
+    }).then(response => {
+      console.log("haaaa");
+        console.log(response.results[0]);
+        console.log("haaaa2");
+    })
+    .catch(err => {
+        console.error(err);
+    });
+    }
+  }
 
   useEffect(() => { //get loc
     (async () => {
@@ -19,8 +64,9 @@ export default function Profile(props) {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location.coords.accuracy);
-     console.log(location)
+      setLocationAl(location.coords.altitude)
+      setLocationLo(location.coords.longitude)
+      //locationToCity(location)
     })();
   }, []);
 
