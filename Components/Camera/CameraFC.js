@@ -10,7 +10,7 @@ export default function CameraFC() {
 
 
   const imageUpload = (imgUri) => {
-    let urlAPI = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/uploadpicture';
+    let urlAPI = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/uploadpicture';
     console.log('uploading ..')
   console.log(imgUri)
     let dataI = new FormData();
@@ -28,7 +28,7 @@ export default function CameraFC() {
     fetch(urlAPI, config)
       .then((res) => {
         if (res.status == 201) { return res.json(); }
-        else { return "err"; }
+        else { return res.status; }
       })
       .then((responseData) => {
         console.log(responseData);
@@ -45,7 +45,7 @@ useEffect(() => {
 
 
 useEffect(() => {
-  let urlAPI = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/uploadpicture';
+  let urlAPI = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/uploadpicture';
   if(picUri){
     console.log(picUri)
       let dataI = new FormData();
@@ -63,7 +63,7 @@ useEffect(() => {
       fetch(urlAPI, config)
         .then((res) => {
           if (res.status == 201) { return res.json(); }
-          else { return "err"; }
+          else { return res.status; }
         })
         .then((responseData) => {
           console.log(responseData);
