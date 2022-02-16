@@ -75,7 +75,7 @@ namespace JamfinderServer.Controllers
 
         //adds a new user to the DB
         [Route("createuser")]
-        public int GetUser(string mail, string nme, string bio)
+        public int PostUser(string mail, string nme, string bio)
         {
             User User = new User(mail, nme, bio);
             return User.addToDB();
