@@ -183,7 +183,7 @@ function getLikes(){
     }
     
     function handleNope(card) {
-      playSound()
+     
       return true;
     }
     function handleMaybe(card) {

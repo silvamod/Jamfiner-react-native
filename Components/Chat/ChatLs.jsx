@@ -129,8 +129,8 @@ export default function ChatLs(props) {
               tempdata.push({
                 id: user.email,
                 fullName: user.name,
-                 timeStamp: "00:00 PM",
-                 recentText: "unknown!",
+                 timeStamp: "",
+                 recentText: "",
                  avatarUrl: user.img
               })
             }) 

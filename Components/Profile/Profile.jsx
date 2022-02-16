@@ -156,7 +156,7 @@ export default function Profile(props) {
       </View>
       <Text style={styles.name}>{city}</Text>
       <Text style={styles.name}>{user.name}</Text>
-      <Text style={styles.bio}>Bio:{user.bio}]</Text>
+      <Text style={styles.bio}>Bio:{user.bio}</Text>
     </View>
 
 
