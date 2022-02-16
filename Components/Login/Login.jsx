@@ -1,12 +1,10 @@
-import { View,Image,Keyboard,TouchableWithoutFeedback,Text,Button} from 'react-native';
+import { View,Image,Text,Button} from 'react-native';
 import React, { useState } from 'react';
 // import styles from './Components/Login/Login.css';
-import AwesomeButton from "react-native-really-awesome-button";
 import  MyButton from "./Button";
 import LoginInput from './LoginInput';
 import { auth } from '../DataBaseSDK/firebaseSDK'
-import LoginWave from '../SVG/loginwave';
-import SingUp from './SingUp'
+import SingUp from './SignUp'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login(props) {
@@ -24,6 +22,7 @@ export default function Login(props) {
   
 
   const handleSignUp = () => {
+    
     auth
       .createUserWithEmailAndPassword(email, password)
       .then (userCredentials => {
@@ -31,6 +30,7 @@ export default function Login(props) {
         //  console. log(user.email);
         props.upDateUserName(user.email)
         props.userAuthOK(0) //Switch to the main page
+        storeData(email)
       })
       .catch(error => alert(error.message))
   }
@@ -51,19 +51,20 @@ export default function Login(props) {
   return (
     
     <>
-    <View>
-    <Image style={{width:400,height:100,marginTop:100}} source={require('../../assets/images/logo-removebg-preview__3_-removebg-preview.png')}/>
+    <View style={{flex:1,alignContent:'center',justifyContent:'center'}}>
+    <View style={{flex:0.3,alignContent:'center',justifyContent:'center'}}>
+    <Image style={{width:'100%',height:50,marginTop:50}} source={require('../../assets/images/logo-removebg-preview__3_-removebg-preview.png')}/>
     </View>
-    <View style={{marginTop:100}}>
-          <LoginInput lable={'Email'} set={setEmail}/>
+    <View style={{flex:0.7,display:'flex',alignItems:'center' ,justifyContent:'center'}}>
+          <LoginInput lable={'Email'} set={setEmail}/>  
           <LoginInput lable={'Password'} pass={true} set={setPassword}/>
-          <MyButton label={'Login'} size={250}handleSignUp={handleLogin}/>
-    </View>
-    <View style={{flex:1,justifyContent:'center',marginBottom:40}}>
-    <SingUp upDateUserName={props.upDateUserName} userAuthOK={props.userAuthOK} handleSignUp={handleSignUp}/>
-      <Text>Dont have an account?</Text>
+          <MyButton label={'Login'} size={150} onP={handleLogin}/>
+          <View style={{display:'flex',flexDirection:'row',alignItems:'baseline'}}>
+          </View>
     </View>
 
+
+  </View>
 
     </>
   );

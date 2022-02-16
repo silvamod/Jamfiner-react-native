@@ -25,17 +25,8 @@ const [modalVisible, setModalVisible] = useState(false);
   }
   return (
     <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
+
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
 
             {/* <View style={styles.inputbox}> */}
             <Text style={{fontSize:30,marginLeft:22,fontWeight:'bold'}}>Sing Up</Text>
@@ -52,14 +43,11 @@ const [modalVisible, setModalVisible] = useState(false);
                 {/* setModalVisible(!modalVisible) */}
               <Text style={styles.textStyle}>Register</Text>
             </Pressable>
-          </View>
         </View>
-      </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}
       >
-        <Text style={styles.textStyle}>Sing Up</Text>
       </Pressable>
     </View>
   )

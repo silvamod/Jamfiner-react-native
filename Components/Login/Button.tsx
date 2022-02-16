@@ -8,13 +8,13 @@ export default function Button(props) {
       <AwesomeButton
       onPress={() => {
         /** Do Something **/
-        props.handleSignUp()
+        props.onP()
       }}
       backgroundColor={'#1a1a1a'}
       width={props.size}
       backgroundDarker={'#191414'}
       textColor={'#b1ff2e'}
-      style={{marginTop:10}}
+      style={{marginTop:10,alignSelf:'stretch'}}
       
     >
       {props.label}

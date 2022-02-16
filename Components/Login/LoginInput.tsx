@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 10,
     borderRadius:5,
-    maxWidth:'55%'
+    alignSelf:'stretch',
+    marginLeft:60,
+    marginRight:60
   },
 });

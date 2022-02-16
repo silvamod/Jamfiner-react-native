@@ -4,7 +4,8 @@ import { StyleSheet, View,Text } from 'react-native';
 import Login from './Components/Login/Login'
 import Navbar from './Components/Nav/Navbar';
 import { NavigationContainer } from '@react-navigation/native';
-import { LinearGradient } from 'expo-linear-gradient';
+import LoginNav from './Components/Login/LoginNav';
+
 
 export default function App() {
   const [isLogin, setisLogin] = useState(1);
@@ -18,7 +19,8 @@ export default function App() {
       <StatusBar style="auto" />
       {isLogin ? 
       <View style={styles.container}>
-      <Login style={styles.loginview} userAuthOK={setisLogin} upDateUserName={setUsername}/>
+        <LoginNav style={styles.loginview} userAuthOK={setisLogin} upDateUserName={setUsername}/>
+      {/* <Login style={styles.loginview} userAuthOK={setisLogin} upDateUserName={setUsername}/> */}
       </View>
       : 
       <Navbar username={username}/>  
@@ -35,7 +37,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
      flex: 1,
-     alignItems: 'center',
+    //  alignItems: 'center',
      backgroundColor: '#c4ff61',
     //  marginTop:20,
   },
