@@ -16,12 +16,7 @@ namespace JamfinderServer.Controllers
     public class UserController : ApiController
     {
 
-        // GET api/<controller>/5
-        [HttpGet]
-        public string Get(int id)
-        {
-            return "value";
-        }
+    
 
         // GET api/<controller>
         [HttpGet]
@@ -74,11 +69,10 @@ namespace JamfinderServer.Controllers
         }
 
         //adds a new user to the DB
-        [Route("createuser")]
-        public int PostUser(string mail, string nme, string bio)
+        public IHttpActionResult PostUser(string mail, string nme, string bio)
         {
             User User = new User(mail, nme, bio);
-            return User.addToDB();
+            return Ok(User.addToDB());
         }
 
 
@@ -106,14 +100,6 @@ namespace JamfinderServer.Controllers
 
         }
 
-        // PUT api/<controller>/5
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+     
     }
 }
