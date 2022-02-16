@@ -74,7 +74,7 @@ namespace JamfinderServer.Controllers
         }
 
         //adds a new user to the DB
-        [HttpPost]
+        [Route("postuser")]
         public IHttpActionResult PostUser(string emaile, string name, string bio)
         {
             User User = new User(emaile, name, bio);
