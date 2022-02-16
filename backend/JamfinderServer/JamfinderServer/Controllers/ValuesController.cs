@@ -90,7 +90,7 @@ namespace JamfinderServer.Controllers
             }
 
             //Where to put the picture on server  ...MapPath("~/TargetDir")
-            string rootPath = HttpContext.Current.Server.MapPath("~/Profile_pics");
+            string rootPath = HttpContext.Current.Server.MapPath("~/uploadFiles");
             var provider = new MultipartFileStreamProvider(rootPath);
             var task = Request.Content.ReadAsMultipartAsync(provider).
                 ContinueWith<HttpResponseMessage>(t =>
@@ -109,7 +109,7 @@ namespace JamfinderServer.Controllers
 
                             //need the guid because in react native in order to refresh an inamge it has to have a new name
 
-                            string newFileName = Path.GetFileNameWithoutExtension(name) + "_" + CreateDateTimeWithValidChars() + Path.GetExtension(name);
+                            string newFileName = Path.GetFileNameWithoutExtension(name) + Path.GetExtension(name);
                             email = Path.GetFileNameWithoutExtension(name);
                             //string newFileName = Path.GetFileNameWithoutExtension(name) + "_" + Guid.NewGuid() + Path.GetExtension(name);
                             //string newFileName = name + "" + Guid.NewGuid();

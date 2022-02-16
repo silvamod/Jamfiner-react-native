@@ -28,7 +28,7 @@ const [modalVisible, setModalVisible] = useState(false);
 
     function addUserToDB(){
       console.log(email,Name,Bio)
-      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email=' + email+"&name="+Name+"&bio="+ Bio
+      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?asd=' + email+"&nme="+Name+"&bio="+ Bio
       fetch(apiUrl, {
         method: 'POST',
         headers: new Headers({
