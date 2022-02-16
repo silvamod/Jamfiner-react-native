@@ -8,20 +8,6 @@ import { auth, db } from '../DataBaseSDK/firebaseSDK';
 export default function Chat(props) {
   const [messages, setMessages] = useState([]);
 
-  // useEffect(() => {
-  //   setMessages([
-  //     {
-  //       _id: 1,
-  //       text: 'Sup developer',
-  //       createdAt: new Date(),
-  //       user: {
-  //         _id: 2,
-  //         name: 'React Native',
-  //         avatar: 'https://placeimg.com/140/140/any',
-  //       },
-  //     },
-  //   ])
-  // }, [])
   useLayoutEffect(() => {
     console.log("user: "+ props.route.params.user)
     console.log("target user: "+props.route.params.targetuser)
