@@ -225,6 +225,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="uploadFiles\" />
+    <Folder Include="Views\Values\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
