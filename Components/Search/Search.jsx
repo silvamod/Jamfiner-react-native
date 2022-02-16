@@ -204,7 +204,7 @@ function getLikes(){
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#eaedee",
+      backgroundColor: "#90E0EF",
       alignItems: "center",
       justifyContent: "center",
       zIndex:1

@@ -1,10 +1,11 @@
 import Slider from '@react-native-community/slider';
 import ToggleSwitch from 'toggle-switch-react-native'
-import React, { useState } from 'react'
-import { Text, View ,StyleSheet,ScrollView} from 'react-native'
+import React, { useState ,useEffect} from 'react'
+import { Text, View ,StyleSheet,ScrollView,SafeAreaView,StatusBar } from 'react-native'
 import SelectBox from 'react-native-multi-selectbox'
 import { xorBy } from 'lodash'
 import AwesomeButton from "react-native-really-awesome-button";
+import { LogBox } from 'react-native';
 
 
 
@@ -57,6 +58,7 @@ export default function Settings() {
   }
 
   return (
+<>
     <View style={styles.container}>
     <View style={styles.multiselectdemocontainer}>
       <Text style={{ fontSize: 20, paddingBottom: 10 }}>Instruments</Text>
@@ -75,7 +77,7 @@ export default function Settings() {
         multiOptionContainerStyle={styles.selectcontainer}
       />
 </View>
-      <Text style={{fontSize:20,justifyContent:'center',paddingTop:10}}>{miles} Miles</Text>
+      <Text style={{fontSize:20,fontWeight:'600',justifyContent:'center',paddingTop:10}}>{miles} Miles</Text>
       <Slider
         style={{width: 300, height: 70}}
         minimumValue={0}
@@ -122,41 +124,41 @@ export default function Settings() {
         /** Do Something **/
       }}
       backgroundColor={'#1a1a1a'}
-      width={250}
+      width={200}
       backgroundDarker={'#191414'}
-      textColor={'#b1ff2e'}
+      textColor={'#fff'}
       style={{marginTop:10}}
       textSize={22}
     >
       Save
     </AwesomeButton>
-    </View>
+</View>
 
     </View>
-
-
-
+    </>
   );
 }
 
 
 const styles = StyleSheet.create({
+
     container: {
-       flex: 1,
-       alignItems: 'center',
-       backgroundColor: '#d7ff94',
+      flex:1,
+       alignItems: 'flex-start',
+       backgroundColor: '#90E0EF',
        justifyContent: 'flex-start',
        padding:5,
+       
     },
     selectitem:{
       color:'#000'
     }, 
     selectitem2:{
       fontSize:15,
-      color:'#000',
+      color:'#fff',
     },
     selectcontainer:{
-      backgroundColor:'#D2691E'
+      backgroundColor:'#0077b6'
     },
     multiselectdemocontainer:{
       width:'90%',

@@ -10,10 +10,11 @@ export default function Button(props) {
         /** Do Something **/
         props.onP()
       }}
+      textSize={23}
       backgroundColor={'#1a1a1a'}
       width={props.size}
       backgroundDarker={'#191414'}
-      textColor={'#b1ff2e'}
+      textColor={'#fff'}
       style={{marginTop:10,alignSelf:'stretch'}}
       
     >
