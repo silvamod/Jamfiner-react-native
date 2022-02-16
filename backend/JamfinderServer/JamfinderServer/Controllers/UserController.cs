@@ -70,9 +70,9 @@ namespace JamfinderServer.Controllers
 
         //adds a new user to the DB
         [Route("api/User/PostUser")]
-        public IHttpActionResult PostUser(string asd, string nme, string bio)
+        public IHttpActionResult PostUser(string asd)
         {
-            User User = new User(asd, nme, bio);
+            User User = new User(asd, "asd", "asdas");
             return Ok(User.addToDB());
         }
 
