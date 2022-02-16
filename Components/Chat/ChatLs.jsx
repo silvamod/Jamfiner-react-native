@@ -17,7 +17,7 @@ if(props.data){
     <Box borderBottomWidth="1" _dark={{
       borderColor: "gray.600"
     }} borderColor="coolGray.200" pl="4" pr="5" py="2">
-          <Pressable onPress={()=>{ props.navigation.navigate('Chat',{targetuser:item.id ,user:props.email})}}>
+          <Pressable onPress={()=>{ props.navigation.navigate('Chat',{targetuser:item.id.toLowerCase() ,user:props.email})}}>
             <HStack space={3} justifyContent="space-between">
               <Avatar  size="48px" source={{
           uri: item.avatarUrl
