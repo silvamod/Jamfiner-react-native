@@ -39,6 +39,23 @@ export default (props) => (
     }}
   >
 
+
+<Tabs.Screen
+      name="Profile"
+      children={()=><Profile username={props.username}/>}
+      options={{
+        tabBarIcon: ({ focused, color, size }) => (
+            <Icon
+                name="user"
+                size={size ? size : 24}
+                color={focused ? color : "#1db954"}
+                focused={focused}
+                color={color}
+            />
+        )
+      }}
+    />
+
     <Tabs.Screen
       name="Settings"
       component={Settings}
@@ -86,21 +103,7 @@ export default (props) => (
       }}
     />
 
-<Tabs.Screen
-      name="Profile"
-      children={()=><Profile username={props.username}/>}
-      options={{
-        tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-                name="user"
-                size={size ? size : 24}
-                color={focused ? color : "#1db954"}
-                focused={focused}
-                color={color}
-            />
-        )
-      }}
-    />
+
   </Tabs.Navigator>
   </>
 )
