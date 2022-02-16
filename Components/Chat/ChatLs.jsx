@@ -23,7 +23,7 @@ if(props.data){
           uri: item.avatarUrl
         }} />
               <VStack>
-                <Text _dark={{
+                <Text style={{fontSize:20, marginTop:20}} _dark={{
             color: "warmGray.50"
           }} color="coolGray.800" bold>
                   {item.fullName}
