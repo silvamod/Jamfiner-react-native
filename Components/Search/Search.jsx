@@ -2,6 +2,8 @@ import { View, Text ,StyleSheet,Image,ImageBackground,Button} from 'react-native
 import SwipeCards from "react-native-swipe-cards-deck";
 import React, { useRef } from 'react';
 import { useState ,useEffect} from 'react';
+import { Audio } from 'expo-av';
+
 
 function Card({ data }) {
     return (
@@ -28,7 +30,29 @@ function StatusCard({ text }) {
 export default function Search(props) {
     const [cards, setCards] = useState();
     const [likes, setLikes] = useState();
+    const [sound, setSound] = useState();
+
     const likebtn = useRef()
+
+
+    async function playSound() {
+      console.log('Loading Sound');
+      const { sound } = await Audio.Sound.createAsync(
+         require('../../assets/sounds/guitarhero.mp3')
+      );
+      setSound(sound);
+  
+      console.log('Playing Sound');
+      await sound.playAsync(); }
+  
+    React.useEffect(() => {
+      return sound
+        ? () => {
+            console.log('Unloading Sound');
+            sound.unloadAsync(); }
+        : undefined;
+    }, [sound]);
+
 
     useEffect(() => {
       let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?userLike=' + props.username
@@ -124,7 +148,8 @@ function getLikes(){
         .then(
           (result) => {
            console.log(result)
-           
+           alert('Its a match !!!')
+           playSound()
           },
           (error) => {
             console.log("err get=", error);
@@ -158,7 +183,7 @@ function getLikes(){
     }
     
     function handleNope(card) {
-     
+      playSound()
       return true;
     }
     function handleMaybe(card) {
