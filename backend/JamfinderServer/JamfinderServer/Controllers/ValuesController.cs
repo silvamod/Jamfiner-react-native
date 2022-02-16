@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using JamfinderServer.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +11,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
-namespace WebApplication1.Controllers
+namespace JamfinderServer.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ValuesController : ApiController
@@ -80,6 +81,7 @@ namespace WebApplication1.Controllers
         [Route("uploadpicture")]
         public Task<HttpResponseMessage> Post()
         {
+            string email = "";
             string outputForNir = "start---";
             List<string> savedFilePath = new List<string>();
             if (!Request.Content.IsMimeMultipartContent())
@@ -88,7 +90,7 @@ namespace WebApplication1.Controllers
             }
 
             //Where to put the picture on server  ...MapPath("~/TargetDir")
-            string rootPath = HttpContext.Current.Server.MapPath("~/uploadFiles");
+            string rootPath = HttpContext.Current.Server.MapPath("~/Profile_pics");
             var provider = new MultipartFileStreamProvider(rootPath);
             var task = Request.Content.ReadAsMultipartAsync(provider).
                 ContinueWith<HttpResponseMessage>(t =>
@@ -106,7 +108,9 @@ namespace WebApplication1.Controllers
                             outputForNir += " ---here2=" + name;
 
                             //need the guid because in react native in order to refresh an inamge it has to have a new name
+
                             string newFileName = Path.GetFileNameWithoutExtension(name) + "_" + CreateDateTimeWithValidChars() + Path.GetExtension(name);
+                            email = Path.GetFileNameWithoutExtension(name);
                             //string newFileName = Path.GetFileNameWithoutExtension(name) + "_" + Guid.NewGuid() + Path.GetExtension(name);
                             //string newFileName = name + "" + Guid.NewGuid();
                             outputForNir += " ---here3" + newFileName;
@@ -128,7 +132,7 @@ namespace WebApplication1.Controllers
 
                             Uri baseuri = new Uri(Request.RequestUri.AbsoluteUri.Replace(Request.RequestUri.PathAndQuery, string.Empty));
                             outputForNir += " ---here5";
-                            string fileRelativePath = "~/uploadFiles/" + newFileName;
+                            string fileRelativePath = "~/Profile_pics/" + newFileName;
                             outputForNir += " ---here6 imageName=" + fileRelativePath;
                             Uri fileFullPath = new Uri(baseuri, VirtualPathUtility.ToAbsolute(fileRelativePath));
                             outputForNir += " ---here7" + fileFullPath.ToString();
@@ -140,8 +144,14 @@ namespace WebApplication1.Controllers
                             string message = ex.Message;
                         }
                     }
+                    //savedFilePath.Add(try1);
+                    User us = new User();
+                    if (us.changeImg(savedFilePath[0], email) == 0)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "There was a problem uploading the file to the server");
+                    }
 
-                    return Request.CreateResponse(HttpStatusCode.Created, "nirchen " + savedFilePath[0] + "!" + provider.FileData.Count + "!" + outputForNir + ":)");
+                    return Request.CreateResponse(HttpStatusCode.Created, savedFilePath[0]);
                 });
             return task;
         }
