@@ -66,7 +66,7 @@ export default function Chat(props) {
   return (
     <View style={styles.container}>
     <GiftedChat
-
+    
     messages={messages}
     showAvatarForEveryMessage={true}
     onSend={messages => onSend(messages)}
@@ -80,7 +80,8 @@ export default function Chat(props) {
 
 const styles = StyleSheet.create({
     container: {
-       flex: 0.85,
+       flex: 0.78,
+       
 
     },
     header:{

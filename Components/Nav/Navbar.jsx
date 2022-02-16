@@ -22,6 +22,7 @@ export default (props) => (
 
   <Tabs.Navigator
     // default configuration from React Navigation
+    screenOptions={{tabBarHideOnKeyboard: true}}
     tabBarOptions={{
       activeTintColor: "#000",
       activeBackgroundColor: '#fff',
