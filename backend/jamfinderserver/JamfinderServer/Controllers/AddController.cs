@@ -12,7 +12,7 @@ using System.Web.Http.Cors;
 
 namespace JamfinderServer.Controllers
 {
-    public class AddController1 : ApiController
+    public class AddController : ApiController
     {
         // GET api/<controller>
         public IEnumerable<string> Get()
