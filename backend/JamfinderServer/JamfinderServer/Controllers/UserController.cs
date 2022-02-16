@@ -72,21 +72,14 @@ namespace JamfinderServer.Controllers
             return Ok(a);
 
         }
-        [Route("asd")]
-        public int GetUser()
+
+        //adds a new user to the DB
+        [Route("createuser")]
+        public int GetUser(string mail, string nme, string bio)
         {
-            User User = new User("stam3@gmail.com", "sras", "asdwq");
+            User User = new User(mail, nme, bio);
             return User.addToDB();
         }
-
-
-        ////adds a new user to the DB
-        //[Route("ywna")]
-        //public int GetUser(string mail, string nme, string bio)
-        //{
-        //    User User = new User(mail, nme, bio);
-        //    return User.addToDB();
-        //}
 
 
         public IHttpActionResult PostMatch(string match1, string match2)
