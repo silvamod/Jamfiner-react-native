@@ -74,7 +74,7 @@ namespace JamfinderServer.Controllers
         }
 
         //adds a new user to the DB
-       
+        [Route("postuser")]
         public int GetUser(string mail, string nme, string bio)
         {
             User User = new User(mail, nme, bio);
