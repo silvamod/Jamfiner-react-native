@@ -22,7 +22,7 @@ export default (props) => (
 
 <>
 <View style={styles.header}>
-<Header/>
+<Header userAuthOK={props.userAuthOK}/>
 </View>
 
   <Tabs.Navigator

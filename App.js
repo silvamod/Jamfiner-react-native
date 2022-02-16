@@ -23,7 +23,7 @@ export default function App() {
       {/* <Login style={styles.loginview} userAuthOK={setisLogin} upDateUserName={setUsername}/> */}
       </View>
       : 
-      <Navbar username={username}/>  
+      <Navbar username={username} userAuthOK={setisLogin}/>  
             //TODO: Pass to the navbar the user info to load
       //          after from SQL all the data about him
       }
