@@ -78,6 +78,14 @@ namespace JamfinderServer.Controllers
         }
 
 
+        // POST api/<controller>
+        public IHttpActionResult PostFuck(string fuck)
+        {
+            User User = new User("asd", "asd", "asd");
+            return Ok(User.addToDB());
+        }
+
+
         public IHttpActionResult PostMatch(string match1, string match2)
         {
             User User = new User();
