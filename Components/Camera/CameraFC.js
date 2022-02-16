@@ -10,6 +10,7 @@ export default function CameraFC(props) {
   const [email, setemail] = useState()
   const [serverPicUri, setpicserverPicUri] = useState()
   const [imgUpdate, setimgUpdate] = useState()
+  let randNum = Math.floor(Math.random() * 2000) + 1
 
   const imageUpload = (imgUri) => {
     console.log(props.name)
@@ -18,7 +19,7 @@ export default function CameraFC(props) {
     let dataI = new FormData();
     dataI.append('picture', {
       uri:  imgUri,
-      name: props.name+".jpg",
+      name: props.name+randNum+".jpg",
       type: 'image/jpg'
     });
 
@@ -34,7 +35,7 @@ export default function CameraFC(props) {
       })
       .then((responseData) => {
         console.log(responseData);
-        setpicserverPicUri("https://proj.ruppin.ac.il/bgroup63/test2/tar1/uploadFiles/"+props.name+".jpg")
+        setpicserverPicUri("https://proj.ruppin.ac.il/bgroup63/test2/tar1/uploadFiles/"+props.name+randNum+".jpg")
       })
       .catch(err => { alert('err upload= ' + err); });
   
@@ -44,8 +45,9 @@ export default function CameraFC(props) {
 //upload new img url to server
 useEffect(() => {
   if(serverPicUri){
+    
     console.log("api::::")
-    let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/updateuser?img='+serverPicUri+"&email="+props.email
+    let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/updateuser?img='+serverPicUri +"&email="+props.email
     console.log(apiUrl)
    fetch(apiUrl, {
      method: 'PUT',
@@ -60,7 +62,7 @@ useEffect(() => {
        (result) => {
          console.log("im here")
          console.log("fetch img= ", result);
-          // setimgUpdate(1)
+          setimgUpdate(1)
        },
        (error) => {
          console.log("err get=", error);
@@ -68,29 +70,30 @@ useEffect(() => {
   }
 }, [serverPicUri])
 
-// useEffect(() => {
-//   if(imgUpdate){
-//   let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email='+props.email
-//  fetch(apiUrl, {
-//    method: 'GET',
-//    headers: new Headers({
-//      'Content-Type': 'application/json; charset=UTF-8',
-//      'Accept': 'application/json; charset=UTF-8'
-//    })
-//  })
-//    .then(res => {
-//      return res.json()
-//    })
-//    .then(
-//      (result) => {
-//        console.log("fetch img= ", result);
-//       props.setUser(result)
-//      },
-//      (error) => {
-//        console.log("err get=", error);
-//      });
-//     }
-// }, [imgUpdate]);
+useEffect(() => {
+  if(imgUpdate){
+  let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email='+props.email
+ fetch(apiUrl, {
+   method: 'GET',
+   headers: new Headers({
+     'Content-Type': 'application/json; charset=UTF-8',
+     'Accept': 'application/json; charset=UTF-8'
+   })
+ })
+   .then(res => {
+     return res.json()
+   })
+   .then(
+     (result) => {
+       console.log("fetch img= ", result);
+      props.setUser(result)
+     },
+     (error) => {
+       console.log("err get=", error);
+     });
+    }
+}, [imgUpdate]);
+
 
 
 
