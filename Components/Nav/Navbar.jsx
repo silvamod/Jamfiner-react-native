@@ -56,6 +56,41 @@ export default (props) => (
       }}
     />
 
+<Tabs.Screen
+      name="Search"
+      children={()=><Search username={props.username}/>}
+      options={{
+        tabBarIcon: ({ focused, color, size }) => (
+            <Icon
+                name="search"
+                size={size ? size : 24}
+                color={focused ? color : "#222222"}
+                focused={focused}
+                color={color}
+            />
+        )
+      }}
+    />
+
+
+
+<Tabs.Screen
+      name="Chat"
+      children={()=><ChatNav username={props.username}/>}
+      options={{
+        tabBarIcon: ({ focused, color, size }) => (
+            <Icon
+                name="message-circle"
+                size={size ? size : 24}
+                color={focused ? color : "#222222"}
+                focused={focused}
+                color={color}
+            />
+        )
+      }}
+    />
+
+    
     <Tabs.Screen
       name="Settings"
       component={Settings}
@@ -72,36 +107,7 @@ export default (props) => (
       }}
     />
 
-<Tabs.Screen
-      name="Search"
-      children={()=><Search username={props.username}/>}
-      options={{
-        tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-                name="search"
-                size={size ? size : 24}
-                color={focused ? color : "#222222"}
-                focused={focused}
-                color={color}
-            />
-        )
-      }}
-    />
-<Tabs.Screen
-      name="Chat"
-      children={()=><ChatNav username={props.username}/>}
-      options={{
-        tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-                name="message-circle"
-                size={size ? size : 24}
-                color={focused ? color : "#222222"}
-                focused={focused}
-                color={color}
-            />
-        )
-      }}
-    />
+
 
 
   </Tabs.Navigator>
