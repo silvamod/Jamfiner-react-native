@@ -69,8 +69,9 @@ namespace JamfinderServer.Controllers
         }
 
         //adds a new user to the DB
-        [System.Web.Http.AcceptVerbs("GET","POST")]
-        [System.Web.Http.HttpPost]
+        [Route("helloWorld")]
+        [AllowAnonymous]
+        [HttpPost]
         public IHttpActionResult PostUser(string asd, string nme, string bio)
         {
             User User = new User(asd, nme, bio);
