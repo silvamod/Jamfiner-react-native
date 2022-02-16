@@ -132,7 +132,7 @@ namespace JamfinderServer.Controllers
 
                             Uri baseuri = new Uri(Request.RequestUri.AbsoluteUri.Replace(Request.RequestUri.PathAndQuery, string.Empty));
                             outputForNir += " ---here5";
-                            string fileRelativePath = "~/Profile_pics/" + newFileName;
+                            string fileRelativePath = "~/uploadFiles/" + newFileName;
                             outputForNir += " ---here6 imageName=" + fileRelativePath;
                             Uri fileFullPath = new Uri(baseuri, VirtualPathUtility.ToAbsolute(fileRelativePath));
                             outputForNir += " ---here7" + fileFullPath.ToString();
