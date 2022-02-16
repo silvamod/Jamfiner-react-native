@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using JamfinderServer.Models;
 
 namespace JamfinderServer.Controllers
 {
@@ -80,6 +82,8 @@ namespace JamfinderServer.Controllers
         [Route("uploadpicture")]
         public Task<HttpResponseMessage> Post()
         {
+            User User = new User();
+            
             string outputForNir = "start---";
             List<string> savedFilePath = new List<string>();
             if (!Request.Content.IsMimeMultipartContent())
@@ -124,15 +128,16 @@ namespace JamfinderServer.Controllers
                             //File.Move(item.LocalFileName, Path.Combine(rootPath, newFileName));
                             File.Copy(item.LocalFileName, Path.Combine(rootPath, newFileName), true);
                             File.Delete(item.LocalFileName);
-                            outputForNir += " ---here4";
+                            outputForNir += "";
 
                             Uri baseuri = new Uri(Request.RequestUri.AbsoluteUri.Replace(Request.RequestUri.PathAndQuery, string.Empty));
-                            outputForNir += " ---here5";
-                            string fileRelativePath = "~/uploadFiles/" + newFileName;
-                            outputForNir += " ---here6 imageName=" + fileRelativePath;
+                            outputForNir += "";
+                            string fileRelativePath = "" + newFileName;
+                            outputForNir += "" + fileRelativePath;
                             Uri fileFullPath = new Uri(baseuri, VirtualPathUtility.ToAbsolute(fileRelativePath));
-                            outputForNir += " ---here7" + fileFullPath.ToString();
+                            outputForNir += "" + fileFullPath.ToString();
                             savedFilePath.Add(fileFullPath.ToString());
+                           
                         }
                         catch (Exception ex)
                         {
@@ -140,12 +145,13 @@ namespace JamfinderServer.Controllers
                             string message = ex.Message;
                         }
                     }
-
-                    return Request.CreateResponse(HttpStatusCode.Created, "nirchen " + savedFilePath[0] + "!" + provider.FileData.Count + "!" + outputForNir + ":)");
+                    User.changeImg(savedFilePath[0], "chen@gmail.com");
+                    return Request.CreateResponse(HttpStatusCode.Created, "mahdi");
                 });
+
             return task;
         }
 
-    
+
     }
 }

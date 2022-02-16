@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Camera } from 'expo-camera';
 
-export default function CameraFC() {
+export default function CameraFC(props) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [camera, setCamera] = useState(null);
   const [picUri, setPicUri] = useState();
-
+  const [email, setemail] = useState()
+  const [serverPicUri, setpicserverPicUri] = useState()
 
   const imageUpload = (imgUri) => {
     let urlAPI = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/uploadpicture';
     console.log('uploading ..')
-  console.log(imgUri)
     let dataI = new FormData();
     dataI.append('picture', {
       uri:  imgUri,
-      name: "stam54.jpg",
+      name: props.name+".jpg",
       type: 'image/jpg'
     });
 
@@ -32,11 +32,43 @@ export default function CameraFC() {
       })
       .then((responseData) => {
         console.log(responseData);
+        setpicserverPicUri(responseData)
       })
       .catch(err => { alert('err upload= ' + err); });
   
 }
 
+
+
+
+
+//upload new img url to server
+useEffect(() => {
+  if(serverPicUri){
+    console.log("api::::")
+    let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/updateuser?img='+serverPicUri+"&email="+props.email
+    console.log(apiUrl)
+   fetch(apiUrl, {
+     method: 'PUT',
+     headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+   })
+   .then(res => {
+     return res
+  })
+     .then(
+       (result) => {
+         console.log("im here")
+         console.log("fetch img= ", result);
+       },
+       (error) => {
+         console.log("err get=", error);
+       });
+  }
+}, [serverPicUri])
+
+//upload img after take picture
 useEffect(() => {
   if(picUri){
     imageUpload(picUri)

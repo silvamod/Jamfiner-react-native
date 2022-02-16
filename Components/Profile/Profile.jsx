@@ -15,14 +15,13 @@ export default function Profile(props) {
 
 
 
-
   useEffect(() => {
     console.log(locationLo)
     console.log(locationAl)
     if(locationLo){
 
       new Promise((resolve) => {
-        const url = `https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json?apiKey=m3BfbYJENLuNFdEQuKJWw088CGRzQdxTy2F4KenRF4g&mode=retrieveAddresses&prox=${locationAl},${locationLo}`
+        const url = `https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json?apiKey=Lzc7d0Uxe9SgQsktA6-LmkFG5UK11TsgyVsbmoI3OrQ&mode=retrieveAddresses&prox=${locationAl},${locationLo}`
         fetch(url)
           .then(res => res.json())
           .then((resJson) => {
@@ -34,6 +33,7 @@ export default function Profile(props) {
               && resJson.Response.View[0].Result
               && resJson.Response.View[0].Result[0]) {
               resolve(resJson.Response.View[0].Result[0].Location.Address.Label)
+              console.log(resJson.Response.View[0].Result[0].Location.Address.City)
                 setcity(resJson.Response.View[0].Result[0].Location.Address.City)
             } else {
               resolve()
@@ -151,11 +151,11 @@ export default function Profile(props) {
 
     <View style={styles.container}>
     <Image style={styles.image} source={{uri:user.img, width:'100%',height:200 }}/>
-    <Popup/>
+    <Popup name={user.name} email={user.email}/>
       <View>
       </View>
       <Text style={styles.name}>{city}</Text>
-      <Text style={styles.name}>{user.email.split('@')[0]}</Text>
+      <Text style={styles.name}>{user.name}</Text>
       <Text style={styles.bio}>Bio:{user.bio}]</Text>
     </View>
 

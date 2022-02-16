@@ -4,7 +4,7 @@ import CameraFC from "./CameraFC";
 import Icon from 'react-native-vector-icons/Feather';
 import AwesomeButton from "react-native-really-awesome-button";
 
-const Popup = () => {
+const Popup = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
@@ -20,7 +20,7 @@ const Popup = () => {
         >
           <View style={styles.popup} >
             <View style={styles.modalView}>
-              <CameraFC/>
+              <CameraFC name ={props.name} email={props.email}/>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}

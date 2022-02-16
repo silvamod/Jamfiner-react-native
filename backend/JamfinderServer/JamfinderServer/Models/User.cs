@@ -43,6 +43,38 @@ namespace JamfinderServer.Models
             return con;
         }
 
+        //Changes users image!
+        public int changeImg(string img, string email)
+        {
+
+            SqlConnection con = null;
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "UPDATE Users SET img='"+ img +"' WHERE email='"+email+"'";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+                // get a reader
+                cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
+
+        }
+
+
 
         public int checkMatch(string user, string targetUser)
         {
