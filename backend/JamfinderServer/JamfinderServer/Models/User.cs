@@ -22,6 +22,14 @@ namespace JamfinderServer.Models
         {
 
         }
+        public User(string email, string name, string bio)
+        {
+            this.email = email;
+            this.name = name;
+            this.bio = bio;
+            this.img = "https://www.kindpng.com/picc/m/21-214439_free-high-quality-person-icon-default-profile-picture.png";
+        }
+
 
         public User(string email, string name, string profession, int experience, string location, string bio, string img)
         {
@@ -42,6 +50,38 @@ namespace JamfinderServer.Models
             con.Open();
             return con;
         }
+
+        public int addToDB()
+        {
+            SqlConnection con = null;
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "INSERT INTO Users (email,username,profession,experience,location,bio,img) " +
+                    "VALUES('"+this.email+"', '"+this.name+"', 'Cello', 0, 'israel', '"+this.bio+"', " +
+                    "'"+this.img+"')";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+                // get a reader
+                cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
+
+        }
+
 
         //Changes users image!
         public int changeImg(string img, string email)
