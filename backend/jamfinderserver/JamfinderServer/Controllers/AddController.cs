@@ -20,14 +20,8 @@ namespace JamfinderServer.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         //adds a new user to the DB
-        public IHttpActionResult Post(string asd, string nme, string bio)
+        public IHttpActionResult Get(string asd, string nme, string bio)
         {
             User User = new User(asd, nme, bio);
             return Ok(User.addToDB());
