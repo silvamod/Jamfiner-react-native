@@ -14,11 +14,6 @@ namespace JamfinderServer.Controllers
 {
     public class AddController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
         //adds a new user to the DB
         public IHttpActionResult Get(string asd, string nme, string bio)
