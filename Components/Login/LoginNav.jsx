@@ -17,13 +17,18 @@ export default function LoginNav(props) {
         name="Welcome"
         component={FrontScreen}
         options={{
+          headerBackground:'#90E0EF',
           headerShown:false
         }}
       />
       <Stack.Screen
         name="SingUp"
-        component={SingUp}
+        // component={SingUp}
+        children={()=><SingUp userAuthOK={props.userAuthOK} upDateUserName={props.upDateUserName}/>}
         options={{
+          headerStyle: {
+            backgroundColor: '#90E0EF',
+          },
           title: 'Sing Up',
         }}
       />
@@ -35,6 +40,9 @@ export default function LoginNav(props) {
         //   userAuthOK:props.userAuthOK,
         //   upDateUserName:props.upDateUserName
         // }}
+        options={{          headerStyle: {
+          backgroundColor: '#90E0EF',
+        },}}
       />
     </Stack.Navigator>
   );

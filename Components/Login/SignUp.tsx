@@ -1,17 +1,33 @@
 
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { Alert, Modal, StyleSheet, Text, Pressable, View ,Image} from "react-native";
 import { auth } from "../DataBaseSDK/firebaseSDK";
 import LoginInput from './LoginInput';
+import  MyButton from "./Button";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SingUp(props) {
 
 const [modalVisible, setModalVisible] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordMatch, setPasswordMatch] = useState('');
   const [username, setUsername] = useState('');
 
+    const storeData = async (value) => {
+      try {
+        await AsyncStorage.setItem('@email', value)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+
   const handleSignUp = () => {
+    if(password != passwordMatch){
+      alert('Passwords are not matched')
+      return
+    }
     auth
       .createUserWithEmailAndPassword(email, password)
       .then (userCredentials => {
@@ -19,37 +35,30 @@ const [modalVisible, setModalVisible] = useState(false);
         //  console. log(user.email);
         props.upDateUserName(user.email)
         props.userAuthOK(0) //Switch to the main page
+        storeData(email)
         setModalVisible(!modalVisible)
       })
       .catch(error => alert(error.message))
   }
   return (
-    <View style={styles.centeredView}>
-
-        <View style={styles.centeredView}>
-
-            {/* <View style={styles.inputbox}> */}
-            <Text style={{fontSize:30,marginLeft:22,fontWeight:'bold'}}>Sing Up</Text>
-            <LoginInput style={styles.input} lable={'Email'} set={setEmail}/>
-            <LoginInput style={styles.input} lable={'Password'} pass={true} set={setPassword}/>    
-            <LoginInput style={styles.input} lable={'Username'} set={setUsername}/>    
-
-            {/* </View> */}
-                
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => handleSignUp()}
-            >
-                {/* setModalVisible(!modalVisible) */}
-              <Text style={styles.textStyle}>Register</Text>
-            </Pressable>
-        </View>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-      </Pressable>
+    <>
+    <View style={{flex:1,alignContent:'center',justifyContent:'center',backgroundColor:'#90E0EF'}}>
+    <View style={{flex:0.3,alignContent:'center',justifyContent:'center'}}>
+    <Image style={{width:'100%',height:50,marginTop:50}} source={require('../../assets/images/logo-removebg-preview__3_-removebg-preview.png')}/>
     </View>
+    <View style={{flex:0.7,display:'flex',alignItems:'center' ,justifyContent:'center'}}>
+          <LoginInput lable={'Email'} set={setEmail}/>  
+          <LoginInput lable={'Password'} pass={true} set={setPassword}/>
+          <LoginInput lable={'Password'} pass={true} set={setPasswordMatch}/>
+          <MyButton label={'Sign Up'} size={150} onP={handleSignUp}/>
+          <View style={{display:'flex',flexDirection:'row',alignItems:'baseline'}}>
+          </View>
+    </View>
+
+
+  </View>
+
+    </>
   )
 }
 

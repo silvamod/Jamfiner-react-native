@@ -10,6 +10,7 @@ import { ProfileHeader } from "@freakycoder/react-native-header-view";
 import { useState , useEffect} from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import ChatNav from "../Chat/ChatNav";
+import Header from "../Header/Header";
 
 const Tabs = AnimatedTabBarNavigator();
 //TODO:Make the profile open first
@@ -21,12 +22,7 @@ export default (props) => (
 
 <>
 <View style={styles.header}>
-<ProfileHeader 
-titleText={'Welcome ' + props.username.split('@')[0]}
-disableFirstIcon={true}
-disableSecondIcon={true}
-//TODO:fetch/add img and name
-/>
+<Header/>
 </View>
 
   <Tabs.Navigator
@@ -121,7 +117,7 @@ const styles = StyleSheet.create({
      backgroundColor: '#000'
   },
   header:{
-    marginTop:'10%',
-    paddingBottom:'2%'
-  },
+    borderBottomColor:'#000',
+    borderBottomWidth:1
+  }
 });

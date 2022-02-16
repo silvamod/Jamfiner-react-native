@@ -50,8 +50,8 @@ export default function Login(props) {
   }
   return (
     
-    <>
-    <View style={{flex:1,alignContent:'center',justifyContent:'center'}}>
+ 
+    <View style={{flex:1,alignContent:'center',justifyContent:'center',backgroundColor:'#90E0EF'}}>
     <View style={{flex:0.3,alignContent:'center',justifyContent:'center'}}>
     <Image style={{width:'100%',height:50,marginTop:50}} source={require('../../assets/images/logo-removebg-preview__3_-removebg-preview.png')}/>
     </View>
@@ -62,11 +62,9 @@ export default function Login(props) {
           <View style={{display:'flex',flexDirection:'row',alignItems:'baseline'}}>
           </View>
     </View>
-
-
   </View>
 
-    </>
+   
   );
 }
 
