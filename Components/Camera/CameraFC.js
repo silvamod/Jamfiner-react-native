@@ -11,6 +11,7 @@ export default function CameraFC(props) {
   const [serverPicUri, setpicserverPicUri] = useState()
 
   const imageUpload = (imgUri) => {
+    console.log(props.name)
     let urlAPI = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/uploadpicture';
     console.log('uploading ..')
     let dataI = new FormData();
@@ -32,15 +33,11 @@ export default function CameraFC(props) {
       })
       .then((responseData) => {
         console.log(responseData);
-        setpicserverPicUri(responseData)
+        setpicserverPicUri("https://proj.ruppin.ac.il/bgroup63/test2/tar1/uploadFiles/"+props.name+".jpg")
       })
       .catch(err => { alert('err upload= ' + err); });
   
 }
-
-
-
-
 
 //upload new img url to server
 useEffect(() => {
@@ -74,8 +71,6 @@ useEffect(() => {
     imageUpload(picUri)
     }
 }, [picUri])
-
-
 
   useEffect(() => {
     (async () => {
