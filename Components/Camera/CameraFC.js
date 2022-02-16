@@ -9,6 +9,7 @@ export default function CameraFC(props) {
   const [picUri, setPicUri] = useState();
   const [email, setemail] = useState()
   const [serverPicUri, setpicserverPicUri] = useState()
+  const [imgUpdate, setimgUpdate] = useState()
 
   const imageUpload = (imgUri) => {
     console.log(props.name)
@@ -39,6 +40,7 @@ export default function CameraFC(props) {
   
 }
 
+
 //upload new img url to server
 useEffect(() => {
   if(serverPicUri){
@@ -58,12 +60,40 @@ useEffect(() => {
        (result) => {
          console.log("im here")
          console.log("fetch img= ", result);
+          // setimgUpdate(1)
        },
        (error) => {
          console.log("err get=", error);
        });
   }
 }, [serverPicUri])
+
+// useEffect(() => {
+//   if(imgUpdate){
+//   let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email='+props.email
+//  fetch(apiUrl, {
+//    method: 'GET',
+//    headers: new Headers({
+//      'Content-Type': 'application/json; charset=UTF-8',
+//      'Accept': 'application/json; charset=UTF-8'
+//    })
+//  })
+//    .then(res => {
+//      return res.json()
+//    })
+//    .then(
+//      (result) => {
+//        console.log("fetch img= ", result);
+//       props.setUser(result)
+//      },
+//      (error) => {
+//        console.log("err get=", error);
+//      });
+//     }
+// }, [imgUpdate]);
+
+
+
 
 //upload img after take picture
 useEffect(() => {

@@ -151,7 +151,7 @@ export default function Profile(props) {
 
     <View style={styles.container}>
     <Image style={styles.image} source={{uri:user.img, width:'100%',height:200 }}/>
-    <Popup name={user.name} email={user.email}/>
+    <Popup name={user.name} email={user.email} setUser={setUser}/>
       <View>
       </View>
       <Text style={styles.name}>{city}</Text>

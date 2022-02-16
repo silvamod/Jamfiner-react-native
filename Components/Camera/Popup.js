@@ -20,7 +20,7 @@ const Popup = (props) => {
         >
           <View style={styles.popup} >
             <View style={styles.modalView}>
-              <CameraFC name ={props.name} email={props.email}/>
+              <CameraFC name ={props.name} email={props.email} setUser={props.setUser}/>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
