@@ -14,7 +14,6 @@ export default function FrontScreen({navigation}) {
       <Button  label={'Login'} size={250} onP={()=>{navigation.navigate('Login')}}></Button>
       <Button  label={'Sign Up'} size={250} onP={()=>{navigation.navigate('SingUp')}}></Button>
       </View>
-      
     </View>
   )
 }
