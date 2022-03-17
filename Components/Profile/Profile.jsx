@@ -81,6 +81,9 @@ export default function Profile(props) {
        (result) => {
          console.log("fetch img= ", result);
         setUser(result)
+        if(result.isAdmin == 1){
+          props.setisAdmin(true)
+        }
        },
        (error) => {
          console.log("err get=", error);

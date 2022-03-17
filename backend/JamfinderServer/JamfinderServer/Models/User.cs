@@ -17,6 +17,7 @@ namespace JamfinderServer.Models
         public string location { get; set; }
         public string bio { get; set; }
         public string img { get; set; }
+        public int isAdmin { get; set; }
 
         public User()
         {
@@ -59,9 +60,9 @@ namespace JamfinderServer.Models
             {
                 con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
 
-                String selectSTR = "INSERT INTO Users (email,username,profession,experience,location,bio,img) " +
+                String selectSTR = "INSERT INTO Users (email,username,profession,experience,location,bio,img,isAdmin) " +
                     "VALUES('"+this.email+"', '"+this.name+"', 'Cello', 0, 'israel', '"+this.bio+"', " +
-                    "'"+this.img+"')";
+                    "'"+this.img+"',0)";
                 SqlCommand cmd = new SqlCommand(selectSTR, con);
                 // get a reader
                 cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
@@ -321,6 +322,7 @@ namespace JamfinderServer.Models
                     user.location = (string)dr["location"];
                     user.bio = (string)dr["bio"];
                     user.img = (string)dr["img"];
+                    user.isAdmin = (int)dr["isAdmin"];
                 }
                 //TODO: Print result
                 return user;

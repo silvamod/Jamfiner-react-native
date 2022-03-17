@@ -80,7 +80,7 @@ export default function Chat(props) {
 
 const styles = StyleSheet.create({
     container: {
-       flex: 0.78,
+       flex: 1,
        
 
     },

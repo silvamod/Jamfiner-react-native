@@ -11,9 +11,14 @@ import { useState , useEffect} from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import ChatNav from "../Chat/ChatNav";
 import Header from "../Header/Header";
+import Admin from "../Admin/Admin";
+
 
 const Tabs = AnimatedTabBarNavigator();
-export default (props) => (
+
+export default function Navbar(props) {
+const [isAdmin, setisAdmin] = useState(false)
+return(
 
 <>
 <View style={styles.header}>
@@ -27,18 +32,33 @@ export default (props) => (
       activeTintColor: "#000",
       activeBackgroundColor: '#fff',
       inactiveTintColor: "#fff",
-      floating:true,
+
       tabStyle : styles.tabs
     }}
     appearance={{
-        floating:true,
+       
     }}
   >
-
+{isAdmin ? 
+<Tabs.Screen
+      name="Admin"
+      children={()=><Admin username={props.username} />}
+      options={{
+        tabBarIcon: ({ focused, color, size }) => (
+            <Icon
+                name="users"
+                size={size ? size : 24}
+                color={focused ? color : "#1db954"}
+                focused={focused}
+                color={color}
+            />
+        )
+      }}
+    /> : <></>}
 
 <Tabs.Screen
       name="Profile"
-      children={()=><Profile username={props.username}/>}
+      children={()=><Profile username={props.username} setisAdmin={setisAdmin}/>}
       options={{
         tabBarIcon: ({ focused, color, size }) => (
             <Icon
@@ -102,15 +122,10 @@ export default (props) => (
         )
       }}
     />
-
-
-
-
   </Tabs.Navigator>
   </>
 )
-
-
+}
 const styles = StyleSheet.create({
   container:{
     flex: 1,
