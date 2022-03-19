@@ -52,6 +52,97 @@ namespace JamfinderServer.Models
             return con;
         }
 
+
+        public List<string[]> getAllMatches()
+        {
+            SqlConnection con = null;
+            List<string[]> MatchList = new List<string[]>();
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "select * from matches";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+
+                // get a reader
+                SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+
+                while (dr.Read())
+                {   // Read till the end of the data into a 
+                    string[] like = new string[2];
+                    like[0] = (string)dr["user1"];
+                    like[1] = (string)dr["user2"];
+                    MatchList.Add(like);
+                }
+                //TODO: Print result
+                return MatchList;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
+
+        }
+
+
+
+        public List<string[]> getLikes()
+        {
+            SqlConnection con = null;
+            List<string[]> LikeList = new List<string[]>();
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "select * from likes";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+
+                // get a reader
+                SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+
+                while (dr.Read())
+                {   // Read till the end of the data into a 
+                    string[] like = new string[2];
+                    like[0] = (string)dr["_user"];
+                    like[1] = (string)dr["target"];
+                    LikeList.Add(like);
+                }
+                //TODO: Print result
+                return LikeList;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
+
+        }
+
+
+
+
+
+
+
         public int addToDB()
         {
             SqlConnection con = null;

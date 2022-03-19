@@ -6,7 +6,7 @@ import { Provider ,Appbar,Card,IconButton,Avatar,DataTable, TextInput} from 'rea
 
 
 
-export default function UsersTable ({navigation}) {
+export default function MatchesTable ({navigation}) {
 
   const itemsPerPage = 2;
   const [page, setPage] = React.useState(0);
@@ -21,7 +21,7 @@ export default function UsersTable ({navigation}) {
 
 
   React.useEffect(() => {
-    let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user'
+    let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/admin/d=1'
    fetch(apiUrl, {
      method: 'GET',
      headers: new Headers({
@@ -36,7 +36,7 @@ export default function UsersTable ({navigation}) {
        (result) => {
          const userCards = []
          result.map(user => {
-            userCards.push({ name: user.name,bio:user.bio,image:user.img ,email:user.email})
+            userCards.push({user1: user[0],user2:user[1]})
            
          }) 
          console.log(userCards)
@@ -64,18 +64,16 @@ export default function UsersTable ({navigation}) {
          <DataTable>
            
           <DataTable.Header style={styles.databeHeader}>
-            <DataTable.Title>Photo</DataTable.Title>
-            <DataTable.Title>Name</DataTable.Title>
-            <DataTable.Title >Email</DataTable.Title>
+            <DataTable.Title>User 1</DataTable.Title>
+            <DataTable.Title >User 2</DataTable.Title>
           </DataTable.Header>
          <ScrollView>
 
            { 
                 data.map((l, i) => (
                 <DataTable.Row style={styles.databeBox} key={i}>
-                  <DataTable.Cell><Avatar.Image size={45} source={{ uri: l.image }} /></DataTable.Cell>
-                  <DataTable.Cell>{l.name}</DataTable.Cell>
-                  <DataTable.Cell>{l.email}</DataTable.Cell>
+                                  <DataTable.Cell>{l.user1}</DataTable.Cell>
+                  <DataTable.Cell>{l.user2}</DataTable.Cell>
                 </DataTable.Row>
              ))
            }
