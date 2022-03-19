@@ -31,17 +31,19 @@ export default function UsersTable ({navigation}) {
       <Appbar.Action icon="magnify" onPress={_handleSearch} />
       <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
     </Appbar.Header>
+
       <View style={styles.mainbox}>
-       <Card>
-       
+        <SafeAreaView>
+       <Card>       
          <DataTable>
+           
           <DataTable.Header style={styles.databeHeader}>
             <DataTable.Title>Photo</DataTable.Title>
             <DataTable.Title>First Name</DataTable.Title>
             <DataTable.Title >Last Name</DataTable.Title>
           </DataTable.Header>
-          <SafeAreaView >
-            <ScrollView >
+         <ScrollView>
+
            { 
                 data.map((l, i) => (
                 <DataTable.Row style={styles.databeBox} key={i}>
@@ -51,13 +53,11 @@ export default function UsersTable ({navigation}) {
                 </DataTable.Row>
              ))
            }
-             </ScrollView>
-    </SafeAreaView>
-        </DataTable>
-     
-     </Card>
-      </View>
-    
+              </ScrollView>
+            </DataTable>
+          </Card>
+        </SafeAreaView>
+      </View> 
     </Provider>
   );
 };
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   mainbox:{
     textAlign:'center',
     margin: 15,
-    flex: 1,
+    flex: 0.8,
     justifyContent: 'space-between',
   },
   databeBox:{
