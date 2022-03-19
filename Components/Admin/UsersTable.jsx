@@ -3,7 +3,11 @@ import { TextArea } from "native-base";
 import React, { Component } from "react";
 import { Text, View,StyleSheet,SafeAreaView,ScrollView} from 'react-native';
 import { Provider ,Appbar,Card,IconButton,Avatar,DataTable, TextInput} from 'react-native-paper';
-const UsersTable = () => {
+
+
+
+export default function UsersTable ({navigation}) {
+
   const itemsPerPage = 2;
   const [page, setPage] = React.useState(0);
   const from = page * itemsPerPage;
@@ -13,9 +17,11 @@ const UsersTable = () => {
    React.useEffect(() => {
     setData([{first_name:"asd", last_name:"qqqqqq"},{first_name:"asd", last_name:"qqqqqq"},{first_name:"asd", last_name:"qqqqqq"},{first_name:"asd", last_name:"qqqqqq"},{first_name:"asd", last_name:"qqqqqq"},{first_name:"asd", last_name:"qqqqqq"},{first_name:"asd", last_name:"qqqqqq"},{first_name:"asd", last_name:"qqqqqq"},{first_name:"asd", last_name:"qqqqqq"},{first_name:"asd", last_name:"qqqqqq"},{first_name:"asd", last_name:"qqqqqq"},{first_name:"asd", last_name:"qqqqqq"}])
   }, []);
-  const _goBack = () => console.log('Went back');
+  const _goBack = () => {navigation.goBack()};
   const _handleSearch = () => console.log('Searching');
   const _handleMore = () => console.log('Shown more');
+
+
   return (
      
     <Provider>
@@ -76,4 +82,3 @@ const styles = StyleSheet.create({
     textAlign: 'left', 
   }
 });
-export default UsersTable;

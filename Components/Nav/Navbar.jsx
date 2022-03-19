@@ -26,6 +26,7 @@ return(
 </View>
 
   <Tabs.Navigator
+  independent={true}
     // default configuration from React Navigation
     screenOptions={{tabBarHideOnKeyboard: true}}
     tabBarOptions={{
@@ -50,7 +51,6 @@ return(
                 size={size ? size : 24}
                 color={focused ? color : "#1db954"}
                 focused={focused}
-                color={color}
             />
         )
       }}
@@ -66,7 +66,6 @@ return(
                 size={size ? size : 24}
                 color={focused ? color : "#1db954"}
                 focused={focused}
-                color={color}
             />
         )
       }}
@@ -82,7 +81,6 @@ return(
                 size={size ? size : 24}
                 color={focused ? color : "#222222"}
                 focused={focused}
-                color={color}
             />
         )
       }}
@@ -100,7 +98,6 @@ return(
                 size={size ? size : 24}
                 color={focused ? color : "#222222"}
                 focused={focused}
-                color={color}
             />
         )
       }}
@@ -117,7 +114,6 @@ return(
                 size={size ? size : 24}
                 color={focused ? color : "#222222"}
                 focused={focused}
-                color={color}
             />
         )
       }}
