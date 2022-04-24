@@ -16,8 +16,6 @@ namespace JamfinderServer.Controllers
     public class UserController : ApiController
     {
 
-    
-
         // GET api/<controller>
         [HttpGet]
         public IHttpActionResult Get()
@@ -52,7 +50,20 @@ namespace JamfinderServer.Controllers
 
         }
 
-        
+        public IHttpActionResult postLogin(string email)
+        {
+            User User = new User();
+            return Ok(User.postLogin(email));
+
+        }
+
+        public IHttpActionResult getLogins(string startDate,string endDate)
+        {
+            User User = new User();
+            return Ok(User.getLogins(startDate,endDate));
+
+        }
+
         public IHttpActionResult GetLikes(string userLike)
         {
             User User = new User();

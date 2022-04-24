@@ -52,6 +52,65 @@ namespace JamfinderServer.Models
             return con;
         }
 
+        //get login counts between startdate and enddate for all users
+        public int getLogins(string startDate, string endDate)
+        {
+            SqlConnection con = null;
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "SELECT * FROM loginCount WHERE ldate BETWEEN '"+startDate +"' and '"+ endDate +"'";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+                // get a reader
+                cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
+
+        }
+
+        //adds login entry for a user with a date and time stamp
+        public int postLogin(string email)
+        {
+            SqlConnection con = null;
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "insert into loginCount(id,ldate,ltime)"+
+"values('"+email+"', (Convert(date, getdate())), (SELECT CONVERT(VARCHAR(8), GETDATE(), 108)))";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+                // get a reader
+                cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
+        }
 
         public List<string[]> getAllMatches()
         {
