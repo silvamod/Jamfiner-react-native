@@ -12,7 +12,6 @@ using System.Web.Http.Cors;
 
 namespace JamfinderServer.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserController : ApiController
     {
 

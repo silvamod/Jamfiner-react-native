@@ -40,7 +40,7 @@ return(
        
     }}
   >
-{isAdmin ? 
+{/* {isAdmin ? 
 <Tabs.Screen
       name="Admin"
       children={()=><Admin username={props.username} />}
@@ -54,7 +54,7 @@ return(
             />
         )
       }}
-    /> : <></>}
+    /> : <></>} */}
 
 <Tabs.Screen
       name="Profile"
@@ -64,7 +64,7 @@ return(
             <Icon
                 name="user"
                 size={size ? size : 24}
-                color={focused ? color : "#1db954"}
+                color={focused ? color : "#ffffff"}
                 focused={focused}
             />
         )
@@ -79,7 +79,7 @@ return(
             <Icon
                 name="search"
                 size={size ? size : 24}
-                color={focused ? color : "#222222"}
+                color={focused ? color : "#ffffff"}
                 focused={focused}
             />
         )
@@ -96,7 +96,7 @@ return(
             <Icon
                 name="message-circle"
                 size={size ? size : 24}
-                color={focused ? color : "#222222"}
+                color={focused ? color : "#ffffff"}
                 focused={focused}
             />
         )
@@ -112,7 +112,7 @@ return(
             <Icon
                 name="settings"
                 size={size ? size : 24}
-                color={focused ? color : "#222222"}
+                color={focused ? color : "#ffffff"}
                 focused={focused}
             />
         )

@@ -2,6 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './Login';
 import SingUp from './SignUp';
 import FrontScreen from './FrontScreen';
+import SpotifyLoginCom from './SpotifyLoginCom';
 import React from 'react'
 
 const Stack = createStackNavigator();
@@ -16,6 +17,14 @@ export default function LoginNav(props) {
       <Stack.Screen
         name="Welcome"
         component={FrontScreen}
+        options={{
+          headerBackground:'#90E0EF',
+          headerShown:false
+        }}
+      />
+        <Stack.Screen
+        name="SpotifyLoginCom"
+        component={SpotifyLoginCom}
         options={{
           headerBackground:'#90E0EF',
           headerShown:false

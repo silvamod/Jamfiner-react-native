@@ -13,6 +13,7 @@ export default function FrontScreen({navigation}) {
       <View style={{flex:0.3,alignItems:'center',justifyContent:'center',marginBottom:50}}>
       <Button  label={'Login'} size={250} onP={()=>{navigation.navigate('Login')}}></Button>
       <Button  label={'Sign Up'} size={250} onP={()=>{navigation.navigate('SingUp')}}></Button>
+      <Button  label={'Login via Spotify'} size={250} onP={()=>{navigation.navigate('SpotifyLoginCom')}}></Button>
       </View>
     </View>
   )
