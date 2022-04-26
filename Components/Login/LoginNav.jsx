@@ -2,6 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './Login';
 import SingUp from './SignUp';
 import FrontScreen from './FrontScreen';
+import SpotifyLogin from './SpotifyLogin';
 import React from 'react'
 
 const Stack = createStackNavigator();
@@ -36,6 +37,19 @@ export default function LoginNav(props) {
         name="Login"
         // component={Login}
         children={()=><Login userAuthOK={props.userAuthOK} upDateUserName={props.upDateUserName}/>}
+        // initialParams={{
+        //   userAuthOK:props.userAuthOK,
+        //   upDateUserName:props.upDateUserName
+        // }}
+        options={{          headerStyle: {
+          backgroundColor: '#90E0EF',
+        },}}
+      />
+
+<Stack.Screen
+        name="SpotifyLogin"
+        // component={Login}
+        children={()=><SpotifyLogin userAuthOK={props.userAuthOK} upDateUserName={props.upDateUserName}/>}
         // initialParams={{
         //   userAuthOK:props.userAuthOK,
         //   upDateUserName:props.upDateUserName

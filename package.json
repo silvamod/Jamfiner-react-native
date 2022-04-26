@@ -36,6 +36,7 @@
     "react-geocode": "^0.2.3",
     "react-native": "0.64.3",
     "react-native-animated-nav-tab-bar": "^3.1.7",
+    "react-native-app-auth": "^6.4.3",
     "react-native-apple-header": "^0.1.1",
     "react-native-autolink": "^4.0.0",
     "react-native-cards-swipe": "^1.1.0",
@@ -60,7 +61,9 @@
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.1",
     "rn-range-slider": "^2.1.1",
-    "toggle-switch-react-native": "^3.3.0"
+    "toggle-switch-react-native": "^3.3.0",
+    "expo-auth-session": "~3.5.0",
+    "expo-random": "~12.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

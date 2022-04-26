@@ -59,6 +59,7 @@ export default function Login(props) {
           <LoginInput lable={'Email'} set={setEmail}/>  
           <LoginInput lable={'Password'} pass={true} set={setPassword}/>
           <MyButton label={'Login'} size={150} onP={handleLogin}/>
+
           <View style={{display:'flex',flexDirection:'row',alignItems:'baseline'}}>
           </View>
     </View>
