@@ -90,7 +90,7 @@ return(
 
 <Tabs.Screen
       name="Chat"
-      children={()=><ChatNav reload={reloadChat} username={props.username}/>}
+      children={()=><ChatNav username={props.username}/>}
       options={{
         tabBarIcon: ({ focused, color, size }) => (
             <Icon
