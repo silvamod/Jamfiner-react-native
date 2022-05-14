@@ -25,7 +25,6 @@ export default function SpotifyLogin(props) {
             "user-read-playback-state",
             "user-top-read",
             "user-modify-playback-state",
-            "streaming",
             "user-read-email",
             "user-read-private",
           ],
@@ -40,8 +39,9 @@ export default function SpotifyLogin(props) {
         if (response?.type === "success") {
           const { access_token } = response.params;
           storeData("@access_token", access_token);
-          console.log(access_token)
-          //props.userAuthOK(0) //Switch to the main page
+          console.log('@access_token',access_token)
+          props.userAuthOK(0) 
+          //Switch to the main page
         //TODO : use => props.upDateUserName(user.email) some how 
         //   dispatch(getCurrentUser()); 
         //   navigation.navigate("Home", { screen: "Home" });

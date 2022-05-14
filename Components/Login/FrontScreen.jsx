@@ -2,9 +2,13 @@ import { View, Text ,Image,StyleSheet} from 'react-native'
 import React from 'react'
 import Button1 from './Button'
 import SpotifyLogin from './SpotifyLogin'
+import { useNavigation } from '@react-navigation/native';
 
 
-export default function FrontScreen({navigation}) {
+
+export default function FrontScreen(props) {
+  const navigation = useNavigation();
+
   return (
     <View style={{flex:1,backgroundColor:'#90E0EF'}}>
       <View style={{flex:0.7,justifyContent:'center',alignItems:'center'}}>
@@ -12,11 +16,10 @@ export default function FrontScreen({navigation}) {
       <Image style={{height:350,width:450}} source={require("../../assets/playing.png")}/>
       </View>
 
-      {/* <SpotifyLogin></SpotifyLogin> */}
       <View style={{flex:0.3,alignItems:'center',justifyContent:'center',marginBottom:50}}>
       <Button1  label={'Login'} size={250} onP={()=>{navigation.navigate('Login')}}></Button1>
       <Button1  label={'Sign Up'} size={250} onP={()=>{navigation.navigate('SingUp')}}></Button1>
-      <SpotifyLogin/>
+      <SpotifyLogin userAuthOK={props.userAuthOK}/>
       </View>
     </View>
   )

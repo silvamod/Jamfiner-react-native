@@ -49,7 +49,7 @@ return(
             <Icon
                 name="users"
                 size={size ? size : 24}
-                color={focused ? color : "#1db954"}
+                color={focused ? color : "#ffffff"}
                 focused={focused}
             />
         )
@@ -64,7 +64,7 @@ return(
             <Icon
                 name="user"
                 size={size ? size : 24}
-                color={focused ? color : "#1db954"}
+                color={focused ? color : "#ffffff"}
                 focused={focused}
             />
         )
@@ -79,7 +79,7 @@ return(
             <Icon
                 name="search"
                 size={size ? size : 24}
-                color={focused ? color : "#222222"}
+                color={focused ? color : "#ffffff"}
                 focused={focused}
             />
         )
@@ -96,7 +96,7 @@ return(
             <Icon
                 name="message-circle"
                 size={size ? size : 24}
-                color={focused ? color : "#222222"}
+                color={focused ? color : "#fff"}
                 focused={focused}
             />
         )
@@ -112,7 +112,7 @@ return(
             <Icon
                 name="settings"
                 size={size ? size : 24}
-                color={focused ? color : "#222222"}
+                color={focused ? color : "#fff"}
                 focused={focused}
             />
         )

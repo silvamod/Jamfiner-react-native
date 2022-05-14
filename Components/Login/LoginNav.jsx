@@ -12,19 +12,16 @@ export default function LoginNav(props) {
   return (
     <Stack.Navigator
       initialRouteName="Welcome"
-
     >
       <Stack.Screen
         name="Welcome"
-        component={FrontScreen}
-        options={{
-          headerBackground:'#90E0EF',
-          headerShown:false
-        }}
+        children={()=><FrontScreen userAuthOK={props.userAuthOK} upDateUserName={props.upDateUserName}/>}
+        options={{          headerStyle: {
+          backgroundColor: '#90E0EF',
+        },}}
       />
       <Stack.Screen
         name="SingUp"
-        // component={SingUp}
         children={()=><SingUp userAuthOK={props.userAuthOK} upDateUserName={props.upDateUserName}/>}
         options={{
           headerStyle: {
@@ -35,12 +32,7 @@ export default function LoginNav(props) {
       />
       <Stack.Screen
         name="Login"
-        // component={Login}
         children={()=><Login userAuthOK={props.userAuthOK} upDateUserName={props.upDateUserName}/>}
-        // initialParams={{
-        //   userAuthOK:props.userAuthOK,
-        //   upDateUserName:props.upDateUserName
-        // }}
         options={{          headerStyle: {
           backgroundColor: '#90E0EF',
         },}}
@@ -48,12 +40,7 @@ export default function LoginNav(props) {
 
 <Stack.Screen
         name="SpotifyLogin"
-        // component={Login}
         children={()=><SpotifyLogin userAuthOK={props.userAuthOK} upDateUserName={props.upDateUserName}/>}
-        // initialParams={{
-        //   userAuthOK:props.userAuthOK,
-        //   upDateUserName:props.upDateUserName
-        // }}
         options={{          headerStyle: {
           backgroundColor: '#90E0EF',
         },}}
