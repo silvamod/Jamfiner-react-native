@@ -17,7 +17,7 @@ import Admin from "../Admin/Admin";
 const Tabs = AnimatedTabBarNavigator();
 
 export default function Navbar(props) {
-const [isAdmin, setisAdmin] = useState(false)
+  const [isAdmin, setisAdmin] = useState(false)
 return(
 
 <>
@@ -90,7 +90,7 @@ return(
 
 <Tabs.Screen
       name="Chat"
-      children={()=><ChatNav username={props.username}/>}
+      children={()=><ChatNav reload={reloadChat} username={props.username}/>}
       options={{
         tabBarIcon: ({ focused, color, size }) => (
             <Icon

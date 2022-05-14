@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState , useEffect} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ChatLs from './ChatLs';
@@ -7,7 +8,10 @@ import Chat from './Chat';
 
 const Stack = createNativeStackNavigator();
 const UsernameContext = React.createContext();
+
 export default function ChatNav(props){
+
+
  
   return (  
    
