@@ -34,12 +34,14 @@ export default function SpotifyLogin(props) {
         discovery
       );
     
-
+      
       useEffect(() => {
         if (response?.type === "success") {
           const { access_token } = response.params;
           storeData("@access_token", access_token);
           console.log('@access_token',access_token)
+          //SYNC !!  Func fetch user info via spotify
+          //https://developer.spotify.com/console/get-current-user/
           props.userAuthOK(0) 
           //Switch to the main page
         //TODO : use => props.upDateUserName(user.email) some how 
