@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JamFinderServer2.0", "JamFinderServer2.0\JamFinderServer2.0.csproj", "{823D9168-D182-4624-9470-073045F1BA9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{823D9168-D182-4624-9470-073045F1BA9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{823D9168-D182-4624-9470-073045F1BA9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{823D9168-D182-4624-9470-073045F1BA9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{823D9168-D182-4624-9470-073045F1BA9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A3B06AD-B4AD-413C-B92D-F83FF4E9A6A8}
+	EndGlobalSection
+EndGlobal

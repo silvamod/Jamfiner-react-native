@@ -21,19 +21,19 @@ export default function Login(props) {
     }
   
 
-  const handleSignUp = () => {
+  // const handleSignUp = () => {
     
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then (userCredentials => {
-        const user = userCredentials.user;
-        //  console. log(user.email);
-        props.upDateUserName(user.email)
-        props.userAuthOK(0) //Switch to the main page
-        storeData(email)
-      })
-      .catch(error => alert(error.message))
-  }
+  //   auth
+  //     .createUserWithEmailAndPassword(email, password)
+  //     .then (userCredentials => {
+  //       const user = userCredentials.user;
+  //       //  console. log(user.email);
+  //       props.upDateUserName(user.email)
+  //       props.userAuthOK(0) //Switch to the main page
+  //       storeData(email)
+  //     })
+  //     .catch(error => alert(error.message))
+  // }
 
   const handleLogin = () => {
     auth
