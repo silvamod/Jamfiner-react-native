@@ -1,6 +1,6 @@
 import Slider from "@react-native-community/slider";
 import ToggleSwitch from "toggle-switch-react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -12,8 +12,7 @@ import {
 import SelectBox from "react-native-multi-selectbox";
 import { xorBy } from "lodash";
 import AwesomeButton from "react-native-really-awesome-button";
-import { LogBox } from "react-native";
-
+import{updateUserSettigns,SettingsInterface} from '../../utils/updateUserSettings'
 // Options data must contain 'item' & 'id' keys
 
 const K_OPTIONS = [
@@ -48,13 +47,8 @@ const skills = [
 ];
 
 export default function Settings() {
-  const [miles, setMiles] = useState(0);
-  const [skill, setSkill] = useState(0);
-  const [male, setMale] = useState(true);
-  const [female, setFemale] = useState(true);
-
-  const [selectedTeams, setSelectedTeams] = useState([]);
-  const [selectedTeam, setSelectedTeam] = useState({});
+  // const [selectedTeams, setSelectedTeams] = useState([]);
+  // const [selectedTeam, setSelectedTeam] = useState({});
   const [settings, setSettings] = useState({
     miles: 0,
     skill: "",
@@ -68,12 +62,15 @@ export default function Settings() {
     //   ...prevState,
     //   selectedItems: selectedTeams,
     // }));
-    return (item) => setSelectedTeams(xorBy(selectedTeams, [item], "id"));
+    return (item) => setSettings((prevState) =>({
+      ...prevState,
+      selectedItems:(xorBy(settings.selectedItems, [item], "id"))
+    }));
   }
 
-  function onChange() {
-    return (val) => setSelectedTeam(val);
-  }
+  // function onChange() {
+  //   return (val) => setSelectedTeam(val);
+  // }
 
   return (
     <>
@@ -83,7 +80,7 @@ export default function Settings() {
           <SelectBox
             label="Select Instruments"
             options={K_OPTIONS}
-            selectedValues={selectedTeams}
+            selectedValues={settings.selectedItems}
             onMultiSelect={onMultiChange()}
             onTapClose={onMultiChange()}
             isMulti
@@ -170,6 +167,15 @@ export default function Settings() {
             onPress={() => {
               /** Do Something **/
               //TODO :: FETCH TO SERVER WITH SETTINGS + LOADING
+              const s:SettingsInterface = {
+                email : 'email',
+                miles: settings.miles,
+                skill : settings.skill,
+                male : settings.male,
+                female : settings.female,
+                selectedItems : settings.selectedItems
+              }
+              updateUserSettigns(s)
             }}
             backgroundColor={"#1a1a1a"}
             width={200}
