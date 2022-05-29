@@ -4,7 +4,7 @@ import Popup from '../Camera/Popup';
 import * as Location from 'expo-location';
 import { useEffect,useState } from 'react';
 import Geocode from "react-geocode";
-
+import { getData } from '../../utils/storage';
 export default function Profile(props) {
 
   const [locationAl, setLocationAl] = useState(null);
@@ -66,7 +66,8 @@ export default function Profile(props) {
   }, []);
 
   useEffect(() => {
-    let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email='+props.username
+    console.log('EMAIL!!!',getData('@email'))
+    let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email='+getData('@email')
    fetch(apiUrl, {
      method: 'GET',
      headers: new Headers({

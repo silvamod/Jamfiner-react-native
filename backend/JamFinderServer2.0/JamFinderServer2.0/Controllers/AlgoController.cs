@@ -21,21 +21,21 @@ namespace JamFinderServer2._0.Controllers
         // GET api/<controller>/5
         public string Get(int id)
         {
-            var url = "http://omer3020.pythonanywhere.com/algo/kfir";
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-            using (var streamWriter = new System.IO.StreamWriter(httpWebRequest.GetRequestStream()))
-            {
-                string json = new JavaScriptSerializer().Serialize(new
-                {
-                    user = "Foo",
-                    password = "Baz",
-                    s = ["ss","ss"]
-                });
+            //var url = "http://omer3020.pythonanywhere.com/algo/kfir";
+            //var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            //httpWebRequest.ContentType = "application/json";
+            //httpWebRequest.Method = "POST";
+            //using (var streamWriter = new System.IO.StreamWriter(httpWebRequest.GetRequestStream()))
+            //{
+            //    string json = new JavaScriptSerializer().Serialize(new
+            //    {
+            //        user = "Foo",
+            //        password = "Baz",
+            //        s = ["ss","ss"]
+            //    });
 
-                streamWriter.Write(json);
-            }
+            //    streamWriter.Write(json);
+            //}
             return "value";
         }
 

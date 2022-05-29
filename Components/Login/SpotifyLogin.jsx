@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import * as WebBrowser from 'expo-web-browser';
 import { ResponseType, useAuthRequest } from "expo-auth-session";
 import { Button } from 'react-native';
-import {storeData} from '../../utils/storage'
+import {storeData,getData} from '../../utils/storage'
 WebBrowser.maybeCompleteAuthSession();
 
 // Endpoint
@@ -35,7 +35,7 @@ export default function SpotifyLogin(props) {
       );
     
       
-      useEffect(() => {
+      useEffect(async () => {
         if (response?.type === "success") {
           const { access_token } = response.params;
           storeData("@access_token", access_token);
@@ -44,7 +44,7 @@ export default function SpotifyLogin(props) {
           //https://developer.spotify.com/console/get-current-user/
           var userdata
           let apiUrl
-          fetch("https://api.spotify.com/v1/me", {
+          await fetch("https://api.spotify.com/v1/me", {
             method: 'GET',
             headers: new Headers({
               'Content-Type': 'application/json',
@@ -54,7 +54,12 @@ export default function SpotifyLogin(props) {
             })
           })
             .then(response => response.json())
-            .then(data => apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email=' + data.email+"&name="+data.display_name+"&bio="+ "spotify"+"&img="+data.images[0].url)
+            .then((data) =>{
+              apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email=' + data.email+"&name="+data.display_name+"&bio="+ "spotify"+"&img="+data.images[0].url
+              storeData('@email',data.email)
+              console.log('getData())',getData('email'))
+              
+            } )
               ,
               (error) => {
                 console.log("err get=", error);
@@ -70,7 +75,7 @@ export default function SpotifyLogin(props) {
                 .then(
                   (result) => {
 
-                       props.userAuthOK(0)
+                      props.userAuthOK(0)
                        console.log(result)
                     }) 
                   ,
