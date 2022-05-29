@@ -433,7 +433,31 @@ namespace JamfinderServer.Models
             }
 
         }
-   
+
+        public int addOrUpdateUser(string email, string name, string bio)
+        {
+            List<User> Users = getUsers();
+            bool foundflag = false;
+            foreach(User user in Users)
+            {
+                if(user.email == email)
+                {
+                    foundflag = true;
+                }
+            }
+            if (!foundflag)
+            {
+                this.email = email;
+                this.name = name;
+                this.bio = bio;
+                addToDB();
+                return 1;
+            }
+
+
+            return 0;
+        }
+
         public List<User> getUsers()
         {
             SqlConnection con = null;

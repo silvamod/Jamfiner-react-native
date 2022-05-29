@@ -42,7 +42,42 @@ export default function SpotifyLogin(props) {
           console.log('@access_token',access_token)
           //SYNC !!  Func fetch user info via spotify
           //https://developer.spotify.com/console/get-current-user/
-          props.userAuthOK(0) 
+          var userdata
+          let apiUrl
+          fetch("https://api.spotify.com/v1/me", {
+            method: 'GET',
+            headers: new Headers({
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              "Authorization":"Bearer "+access_token,
+
+            })
+          })
+            .then(response => response.json())
+            .then(data => apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email=' + data.email+"&name="+data.display_name+"&bio="+ "spotify"+"&img="+data.images[0].url)
+              ,
+              (error) => {
+                console.log("err get=", error);
+              };
+
+              fetch(apiUrl, {
+                method: 'POST',
+                headers: new Headers({
+                  'Content-Type': 'application/json; charset=UTF-8',
+                  'Accept': 'application/json; charset=UTF-8'
+                })
+              })
+                .then(
+                  (result) => {
+
+                       props.userAuthOK(0)
+                       console.log(result)
+                    }) 
+                  ,
+                  (error) => {
+                    console.log("err get=", error);
+                  };
+          
           //Switch to the main page
         //TODO : use => props.upDateUserName(user.email) some how 
         //   dispatch(getCurrentUser()); 
