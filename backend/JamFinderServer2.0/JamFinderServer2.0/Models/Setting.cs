@@ -23,7 +23,7 @@ namespace JamFinderServer2._0.Models
         public String upDateSttings(String setting)
         {
             Console.WriteLine(setting);
-            return "ss";
+            return setting;
         }
 
     }
