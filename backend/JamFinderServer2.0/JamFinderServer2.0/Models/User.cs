@@ -435,6 +435,38 @@ namespace JamFinderServer2._0.Models
 
         }
 
+
+        public int addOrUpdateUser(string email, string name, string bio,string img)
+        {
+            List<User> Users = getUsers();
+            bool foundflag = false;
+            foreach (User user in Users)
+            {
+                if (user.email == email)
+                {
+                    foundflag = true;
+                    if (user.name != name)
+                        this.name = name;
+                    if (user.bio != bio)
+                        this.bio = bio;
+                    if (user.img != img)
+                        this.img = img;
+                }
+            }
+            if (!foundflag)
+            {
+                this.email = email;
+                this.name = name;
+                this.bio = bio;
+                this.img = img;
+                addToDB();
+                return 1;
+            }
+
+
+            return 0;
+        }
+
         public List<User> getUsers()
         {
             SqlConnection con = null;

@@ -51,8 +51,14 @@ namespace JamfinderServer.Controllers
             }
 
         }
+        public IHttpActionResult addOrUpdateUser(string email, string name, string bio)
+        {
+            User User = new User();
+            int likes = User.addOrUpdateUser(email,name,bio);
+            return Ok(likes);
+        }
 
-        
+
         public IHttpActionResult GetLikes(string userLike)
         {
             User User = new User();
