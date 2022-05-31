@@ -12,6 +12,7 @@ namespace JamFinderServer2._0.Models
     {
         public string email { get; set; }
         public string name { get; set; }
+        public string[] genres { get; set; }
         public string profession { get; set; }
         public int experience { get; set; }
         public string location { get; set; }
@@ -51,6 +52,9 @@ namespace JamFinderServer2._0.Models
             con.Open();
             return con;
         }
+
+
+
 
 
         public List<string[]> getAllMatches()
@@ -436,7 +440,7 @@ namespace JamFinderServer2._0.Models
         }
 
 
-        public int addOrUpdateUser(string email, string name, string bio,string img)
+        public int addOrUpdateUser(string email, string name, string bio, string img)
         {
             List<User> Users = getUsers();
             bool foundflag = false;
@@ -466,6 +470,68 @@ namespace JamFinderServer2._0.Models
 
             return 0;
         }
+        public List<User> getSearchedUsers(string targetUser)
+        {
+            List<User> users = getUsers();
+            List<User> returnList = new List<User>();
+            Dictionary<string, string[]> Users = new Dictionary<string, string[]>();
+            string responseFromServer;
+            foreach (User user in users)
+            {
+                Users.Add(user.email, user.genres);
+            }
+
+            var jsonobj = new Object
+            {
+                Users
+            };
+
+            var json = JsonConvert.SerializeObject(jsonobj);
+
+            byte[] byteArray = Encoding.UTF8.GetBytes(json);
+            WebRequest request = WebRequest.Create("http://omer3020.pythonanywhere.com/algo/kfir");
+            //request.Credentials = CredentialCache.DefaultCredentials;
+            request.Method = "POST";
+            request.ContentType = "application/json";
+            // Set the ContentLength property of the WebRequest.
+            request.ContentLength = byteArray.Length;
+
+            // Get the request stream.
+            Stream dataStream = request.GetRequestStream();
+            // Write the data to the request stream.
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            // Close the Stream object.
+            dataStream.Close();
+
+            // Get the response.
+            WebResponse response = request.GetResponse();
+            // Display the status.
+            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            using (dataStream = response.GetResponseStream())
+            {
+                // Open the stream using a StreamReader for easy access.
+                StreamReader reader = new StreamReader(dataStream);
+                // Read the content.
+                responseFromServer = reader.ReadToEnd();
+                // Display the content.
+                Console.WriteLine(responseFromServer);
+                response.Close();
+                return responseFromServer;
+            }
+            List<KeyValuePair<string, string>> pyResults = serializer.Deserialize<List<KeyValuePair<string, string>>>(responseFromServer);
+            pyResults = pyResults.OrderBy(o => o.Value).ToList();
+            foreach(KeyValuePair<string, string> res in pyResults)
+            {
+                returnList.Add(users.Find(x => x.GetEmail() == res.Key));
+                
+            }
+            return returnList;
+
+            // Close the response.
+        }
+
+
+
 
         public List<User> getUsers()
         {
