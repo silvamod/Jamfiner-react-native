@@ -65,9 +65,12 @@ export default function Profile(props) {
     })();
   }, []);
 
-  useEffect(() => {
-    console.log('EMAIL!!!',getData('@email'))
-    let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email='+getData('@email')
+  useEffect( async() => {
+    const email = await getData('@email')
+    console.log('getData()',email)
+    let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email='+ email
+    console.log('apiUrl()',apiUrl)
+
    fetch(apiUrl, {
      method: 'GET',
      headers: new Headers({

@@ -10,9 +10,9 @@ export const getUserDataFromSpotify = async (access_token: string) => {
       Authorization: `Bearer ${access_token}`,
     }),
   }).then(response => response.json())
-    .then((data)=>{
+    .then(async (data)=>{
     console.log("https://api.spotify.com/v1/me", data);
-    sendUserDataToBackEnd(data)
+    await sendUserDataToBackEnd(data)
   }),
     (error) => {
       console.log("err get=", error);

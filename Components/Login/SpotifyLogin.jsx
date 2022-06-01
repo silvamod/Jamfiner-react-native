@@ -43,9 +43,11 @@ export default function SpotifyLogin(props) {
           console.log('@access_token',access_token)
           //SYNC !!  Func fetch user info via spotify
           //https://developer.spotify.com/console/get-current-user/
-         
-          getUserDataFromSpotify(access_token)
-          // props.userAuthOK(0)
+         console.log('1')
+        await getUserDataFromSpotify(access_token)
+         console.log('2')
+          props.userAuthOK(0)
+         console.log('3')
               
            
               //   method: 'POST',

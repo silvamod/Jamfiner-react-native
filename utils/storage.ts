@@ -12,6 +12,7 @@ export const storeData = async (name:string,data: string) => {
 export const getData = async(name:string) => {
     try {
       const response = await AsyncStorage.getItem(name);  
+      console.log('AsyncStorage.getItem',response)
       return response
     } catch (error) {
         return error
