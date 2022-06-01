@@ -7,12 +7,12 @@ namespace JamFinderServer2._0.Models
 {
     public class Setting
     {
-        public string Email { get; set; }
-        public string Miles { get; set; }
-        public string Skill { get; set; }
-        public bool Male { get; set; }
-        public bool Female { get; set; }
-        public string selectedItems { get; set; }
+        public string email { get; set; }
+        public int  miles { get; set; }
+        public string skill { get; set; }
+        public bool male { get; set; }
+        public bool female { get; set; }
+        public string[] selectedItems { get; set; }
 
 
         public Setting()
@@ -20,7 +20,17 @@ namespace JamFinderServer2._0.Models
 
         }
 
-        public String upDateSttings(String setting)
+        public Setting(string email, int miles, string skill, bool male, bool female, string[] selectedItems)
+        {
+            this.email = email;
+            this.miles = miles;
+            this.skill = skill;
+            this.male = male;
+            this.female = female;
+            this.selectedItems = selectedItems;
+        }
+
+        public Setting upDateSttings(Setting setting)
         {
             Console.WriteLine(setting);
             return setting;

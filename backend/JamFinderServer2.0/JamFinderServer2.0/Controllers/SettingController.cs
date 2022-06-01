@@ -24,7 +24,7 @@ namespace JamFinderServer2._0.Controllers
 
         // POST api/<controller>
         //post new settings to a user
-        public string Post([FromBody] string value)
+        public Setting Post([FromBody] Setting value)
         {
             Setting setting = new Setting();
             return setting.upDateSttings(value);

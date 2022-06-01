@@ -190,7 +190,6 @@ export default function Settings() {
           <AwesomeButton
             onPress={() => {
               console.log(settings);
-              console.log("selectedTeams", selectedTeams);
             }}
             backgroundColor={"#1a1a1a"}
             width={200}

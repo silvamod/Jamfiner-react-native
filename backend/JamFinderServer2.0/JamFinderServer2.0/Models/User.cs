@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Configuration;
 
@@ -52,11 +56,6 @@ namespace JamFinderServer2._0.Models
             con.Open();
             return con;
         }
-
-
-
-
-
         public List<string[]> getAllMatches()
         {
             SqlConnection con = null;
@@ -97,9 +96,6 @@ namespace JamFinderServer2._0.Models
             }
 
         }
-
-
-
         public List<string[]> getLikes()
         {
             SqlConnection con = null;
@@ -140,13 +136,6 @@ namespace JamFinderServer2._0.Models
             }
 
         }
-
-
-
-
-
-
-
         public int addToDB()
         {
             SqlConnection con = null;
@@ -177,8 +166,6 @@ namespace JamFinderServer2._0.Models
             }
 
         }
-
-
         //Changes users image!
         public int changeImg(string img, string email)
         {
@@ -209,9 +196,6 @@ namespace JamFinderServer2._0.Models
             }
 
         }
-
-
-
         public int checkMatch(string user, string targetUser)
         {
             SqlConnection con = null;
@@ -293,7 +277,6 @@ namespace JamFinderServer2._0.Models
             }
 
         }
-
         public int addMatch(string match1, string match2)
         {
             SqlConnection con = null;
@@ -352,8 +335,6 @@ namespace JamFinderServer2._0.Models
 
             }
         }
-
-
         public List<String> getLikes(string email) // returns like table for requested user.
         {
             SqlConnection con = null;
@@ -392,8 +373,6 @@ namespace JamFinderServer2._0.Models
             }
 
         }
-
-
         public User getUser(string email)
         {
             SqlConnection con = null;
@@ -438,8 +417,6 @@ namespace JamFinderServer2._0.Models
             }
 
         }
-
-
         public int addOrUpdateUser(string email, string name, string bio, string img)
         {
             List<User> Users = getUsers();
@@ -483,7 +460,7 @@ namespace JamFinderServer2._0.Models
 
             var jsonobj = new Object
             {
-                Users
+                //Users
             };
 
             var json = JsonConvert.SerializeObject(jsonobj);
@@ -516,23 +493,19 @@ namespace JamFinderServer2._0.Models
                 // Display the content.
                 Console.WriteLine(responseFromServer);
                 response.Close();
-                return responseFromServer;
+                //return responseFromServer;
             }
-            List<KeyValuePair<string, string>> pyResults = serializer.Deserialize<List<KeyValuePair<string, string>>>(responseFromServer);
-            pyResults = pyResults.OrderBy(o => o.Value).ToList();
-            foreach(KeyValuePair<string, string> res in pyResults)
-            {
-                returnList.Add(users.Find(x => x.GetEmail() == res.Key));
+            //List<KeyValuePair<string, string>> pyResults = serializer.Deserialize<List<KeyValuePair<string, string>>>(responseFromServer);
+            //pyResults = pyResults.OrderBy(o => o.Value).ToList();
+            //foreach(KeyValuePair<string, string> res in pyResults)
+            //{
+            //    returnList.Add(users.Find(x => x.GetEmail() == res.Key));
                 
-            }
+            //}
             return returnList;
 
             // Close the response.
         }
-
-
-
-
         public List<User> getUsers()
         {
             SqlConnection con = null;

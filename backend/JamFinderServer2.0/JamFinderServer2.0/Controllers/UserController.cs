@@ -52,11 +52,12 @@ namespace JamfinderServer.Controllers
 
         }
 
-        [HttpPost]
-        public IHttpActionResult addOrUpdateUser(string email, string name, string bio,string img)
+        [HttpGet]
+        public IHttpActionResult addOrUpdateUser(string email, string name, string bio,string img,string height,string width,string ext,string hash)
         {
+            string fullimg = img+ "&height=" + height+ "&width=" + width+ "&ext=" + ext+ "hash=&" + hash;
             User User = new User();
-            int likes = User.addOrUpdateUser(email, name, bio,img);
+            int likes = User.addOrUpdateUser(email, name, bio, fullimg);
             return Ok(likes);
         }
 
