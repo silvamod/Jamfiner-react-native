@@ -3,6 +3,7 @@ import SwipeCards from "react-native-swipe-cards-deck";
 import React, { useRef } from 'react';
 import { useState ,useEffect} from 'react';
 import { Audio } from 'expo-av';
+import { getData } from '../../utils/storage';
 
 
 function Card({ data }) {
@@ -76,8 +77,10 @@ export default function Search(props) {
           };
    }, []);
 
-    useEffect(() => {
-      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user'
+    useEffect(async() => {
+      email = await getData('@email')
+      console.log('email!!',email)
+      let apiUrl = `https://proj.ruppin.ac.il/bgroup63/test2/tar1/user/getSearchedUsers?targetUser=${email}`
      fetch(apiUrl, {
        method: 'GET',
        headers: new Headers({
@@ -90,9 +93,10 @@ export default function Search(props) {
        })
        .then(
          (result) => {
+          console.log('result',result)
            const userCards = []
            result.map(user => {
-             if(user.email != props.username  & !likes.includes(user.email)){
+             if(user.email != email  & !likes.includes(user.email)){
                 userCards.push({ name: user.name,bio:user.bio,image:user.img ,email:user.email})
              }
            }) 

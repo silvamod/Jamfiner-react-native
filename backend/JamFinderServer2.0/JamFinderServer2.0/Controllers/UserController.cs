@@ -118,6 +118,15 @@ namespace JamfinderServer.Controllers
 
         }
 
+        [Route("user/addUserGenres")]
+        [HttpGet]
+        public IHttpActionResult addUserGenres(string targetUser, string genres)
+        {
+            User User = new User();
+            return Ok(User.AddGenresToUser(genres, targetUser));
+
+        }
+
 
     }
 }

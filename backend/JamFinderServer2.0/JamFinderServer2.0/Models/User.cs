@@ -9,8 +9,9 @@ using System.Text;
 using System.Web;
 using System.Web.Configuration;
 using System.Text.Json.Serialization;
-
-
+using System.Collections;
+using System.Reflection;
+using Newtonsoft.Json.Linq;
 
 namespace JamFinderServer2._0.Models
 {
@@ -447,16 +448,17 @@ namespace JamFinderServer2._0.Models
 
             return 0;
         }
-        public string getSearchedUsers(string targetUser)
+        public List<User> getSearchedUsers(string targetUser)
         {
             List<User> users = getUsers();
             List<User> returnList = new List<User>();
             Dictionary<string, string[]> Users = new Dictionary<string, string[]>();
+            Random _random = new Random();
             string responseFromServer;
             foreach (User user in users)
             {
                 //user.genger
-                string[] gen = new string[] { "pop", "pop", "pop", "pop rock", "british country" };
+                string[] gen = new string[] { "country rock", "danish metal", "chill pop", "pop rock", "british country" };
                 Users.Add(user.email, gen);
             }
 
@@ -498,17 +500,61 @@ namespace JamFinderServer2._0.Models
                 response.Close();
                 //return responseFromServer;
             }
-            //List<KeyValuePair<string, string>> pyResults = JsonSerializer.Deserialize<List<KeyValuePair<string, string>>>(responseFromServer);
-            //pyResults = pyResults.OrderBy(o => o.Value).ToList();
-            //foreach (KeyValuePair<string, string> res in pyResults)
-            //{
-            //    returnList.Add(users.Find(x => x.GetEmail() == res.Key));
 
-            //}
-            return responseFromServer;
-            // return returnList;
+            //var pyResults = JsonConvert.DeserializeObject(responseFromServer);
+            var dataObj = JObject.Parse(responseFromServer);
+
+            //var result = ((IEnumerable)pyResults).Cast<object>().ToList();
+            List<KeyValuePair<string, string>> pyResults1 = new List<KeyValuePair<string, string>>();
+            var dataObj1 = dataObj.First;
+            for (int i = 0; i < dataObj.Count; i++)
+            {
+                pyResults1.Add(new KeyValuePair<string, string>(dataObj1.Last.ToString(), dataObj1.First.Path.Replace("[", "").Replace("]", "").Replace("'", "")));
+                if (dataObj1.Next != null)
+                {
+                    dataObj1 = dataObj1.Next;
+                }
+
+            }
+
+            pyResults1 = pyResults1.OrderBy(o => o.Value).ToList();
+            foreach (KeyValuePair<string, string> res in pyResults1)
+            {
+                returnList.Add(users.Find(x => x.email == res.Value));
+
+            }
+            //return responseFromServer;
+            return returnList;
 
             // Close the response.
+        }
+
+        public int AddGenresToUser(string genres,string email)
+        {
+            SqlConnection con = null;
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "UPDATE users SET genres = '" + genres + "' WHERE email='" + email + "'";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+                // get a reader
+                cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
         }
         public List<User> getUsers()
         {
