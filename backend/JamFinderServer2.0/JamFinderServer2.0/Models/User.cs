@@ -27,6 +27,7 @@ namespace JamFinderServer2._0.Models
         public string bio { get; set; }
         public string img { get; set; }
         public int isAdmin { get; set; }
+        public float score { get; set; }
 
         public User()
         {
@@ -520,6 +521,7 @@ namespace JamFinderServer2._0.Models
             pyResults1 = pyResults1.OrderBy(o => o.Value).ToList();
             foreach (KeyValuePair<string, string> res in pyResults1)
             {
+                users.Find(x => x.email == res.Value).score = res.Key;
                 returnList.Add(users.Find(x => x.email == res.Value));
 
             }
