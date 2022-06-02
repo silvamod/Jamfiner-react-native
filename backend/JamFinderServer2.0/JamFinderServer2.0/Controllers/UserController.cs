@@ -109,6 +109,15 @@ namespace JamfinderServer.Controllers
 
         }
 
+        [Route("user/getSearchedUsers")]
+        [HttpGet]
+        public IHttpActionResult getSearchedUsers(string targetUser)
+        {
+            User User = new User();
+            return Ok(User.getSearchedUsers(targetUser));
+
+        }
+
 
     }
 }

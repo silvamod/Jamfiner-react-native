@@ -8,6 +8,9 @@ using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Configuration;
+using System.Text.Json.Serialization;
+
+
 
 namespace JamFinderServer2._0.Models
 {
@@ -35,8 +38,6 @@ namespace JamFinderServer2._0.Models
             this.bio = bio;
             this.img = "https://www.kindpng.com/picc/m/21-214439_free-high-quality-person-icon-default-profile-picture.png";
         }
-
-
         public User(string email, string name, string profession, int experience, string location, string bio, string img)
         {
             this.email = email;
@@ -47,7 +48,6 @@ namespace JamFinderServer2._0.Models
             this.bio = bio;
             this.img = img;
         }
-
         public SqlConnection connect(String conString)
         {
             // read the connection string from the configuration file
@@ -447,7 +447,7 @@ namespace JamFinderServer2._0.Models
 
             return 0;
         }
-        public List<User> getSearchedUsers(string targetUser)
+        public string getSearchedUsers(string targetUser)
         {
             List<User> users = getUsers();
             List<User> returnList = new List<User>();
@@ -455,18 +455,21 @@ namespace JamFinderServer2._0.Models
             string responseFromServer;
             foreach (User user in users)
             {
-                Users.Add(user.email, user.genres);
+                //user.genger
+                string[] gen = new string[] { "pop", "pop", "pop", "pop rock", "british country" };
+                Users.Add(user.email, gen);
             }
 
-            var jsonobj = new Object
+            var jsonobj = new Dictionary<string, Dictionary<string, string[]>>
             {
-                //Users
+                ["Users"] = Users
             };
+            
 
             var json = JsonConvert.SerializeObject(jsonobj);
 
             byte[] byteArray = Encoding.UTF8.GetBytes(json);
-            WebRequest request = WebRequest.Create("http://omer3020.pythonanywhere.com/algo/kfir");
+            WebRequest request = WebRequest.Create("http://omer3020.pythonanywhere.com/algo/"+ targetUser);
             //request.Credentials = CredentialCache.DefaultCredentials;
             request.Method = "POST";
             request.ContentType = "application/json";
@@ -495,14 +498,15 @@ namespace JamFinderServer2._0.Models
                 response.Close();
                 //return responseFromServer;
             }
-            //List<KeyValuePair<string, string>> pyResults = serializer.Deserialize<List<KeyValuePair<string, string>>>(responseFromServer);
+            //List<KeyValuePair<string, string>> pyResults = JsonSerializer.Deserialize<List<KeyValuePair<string, string>>>(responseFromServer);
             //pyResults = pyResults.OrderBy(o => o.Value).ToList();
-            //foreach(KeyValuePair<string, string> res in pyResults)
+            //foreach (KeyValuePair<string, string> res in pyResults)
             //{
             //    returnList.Add(users.Find(x => x.GetEmail() == res.Key));
-                
+
             //}
-            return returnList;
+            return responseFromServer;
+            // return returnList;
 
             // Close the response.
         }
