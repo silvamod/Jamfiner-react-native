@@ -3,8 +3,8 @@ import React from 'react';
 import Popup from '../Camera/Popup';
 import * as Location from 'expo-location';
 import { useEffect,useState } from 'react';
-import Geocode from "react-geocode";
 import { getData } from '../../utils/storage';
+import { getUserGenresFromSpotify } from '../../utils/getUserGenresFromSpotify';
 export default function Profile(props) {
 
   const [locationAl, setLocationAl] = useState(null);
@@ -49,7 +49,6 @@ export default function Profile(props) {
     }
   }, [locationLo])
 
-
   useEffect(() => { //get loc
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -93,6 +92,9 @@ export default function Profile(props) {
          console.log("err get=", error);
        });
  }, []);
+
+
+ 
  if(user){
   return (
     <>

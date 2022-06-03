@@ -9,7 +9,7 @@ import { getData } from "./utils/storage";
 
 const fetchUser = async () => {
   const user = await getData("@access_token");
-  console.log("access_token", user);
+
   if (!user) {
     setisLogin(1);
   } else {

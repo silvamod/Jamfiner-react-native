@@ -21,7 +21,7 @@ export const updateUserSettigns = async (settings: SettingsInterface) => {
     body: JSON.stringify(settings)
   });
   const content = await rawResponse.json();
-  console.log(content)
+  // console.log(content)
   try {
   } catch (error) {
     return error;

@@ -27,7 +27,7 @@ namespace JamFinderServer2._0.Models
         public string bio { get; set; }
         public string img { get; set; }
         public int isAdmin { get; set; }
-        public float score { get; set; }
+        public string score { get; set; }
 
         public User()
         {

@@ -4,6 +4,7 @@ import { ResponseType, useAuthRequest } from "expo-auth-session";
 import { Button } from 'react-native';
 import {storeData,getData} from '../../utils/storage'
 import {getUserDataFromSpotify} from '../../utils/getUserDataFromSpotify'
+import {getUserGenresFromSpotify} from '../../utils/getUserGenresFromSpotify'
 WebBrowser.maybeCompleteAuthSession();
 
 // Endpoint
@@ -43,11 +44,12 @@ export default function SpotifyLogin(props) {
           console.log('@access_token',access_token)
           //SYNC !!  Func fetch user info via spotify
           //https://developer.spotify.com/console/get-current-user/
-         console.log('1')
         await getUserDataFromSpotify(access_token)
-         console.log('2')
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        // const token = await getData('@access_token')
+        const a = await getUserGenresFromSpotify(access_token)
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
           props.userAuthOK(0)
-         console.log('3')
               
            
               //   method: 'POST',
