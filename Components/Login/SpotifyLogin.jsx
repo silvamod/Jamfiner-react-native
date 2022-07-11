@@ -39,16 +39,17 @@ export default function SpotifyLogin(props) {
       
       useEffect(async () => {
         if (response?.type === "success") {
-          const { access_token } = response.params;
-          storeData("@access_token", access_token);
-          console.log('@access_token',access_token)
-          //SYNC !!  Func fetch user info via spotify
+        const { access_token } = response.params;
+        await storeData("@access_token", access_token);
+        console.log('@access_token',access_token)
+        //SYNC !!  Func fetch user info via spotify
           //https://developer.spotify.com/console/get-current-user/
-        await getUserDataFromSpotify(access_token)
+        const userData = await getUserDataFromSpotify(access_token)
         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         // const token = await getData('@access_token')
         const a = await getUserGenresFromSpotify(access_token)
         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        console.log(userData);
           props.userAuthOK(0)
               
            

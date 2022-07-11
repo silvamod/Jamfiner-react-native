@@ -13,6 +13,7 @@ function Card({ data }) {
         <ImageBackground source={{uri:data.image}} style={styles.image}>
         </ImageBackground>
         <View>
+        <Text style={styles.name}>{data.score}</Text>
         <Text style={styles.name}>{data.name}</Text>
         <Text style={styles.bio}>{data.bio}</Text>
         </View>
@@ -97,7 +98,9 @@ export default function Search(props) {
            const userCards = []
            result.map(user => {
              if(user.email != email  & !likes.includes(user.email)){
-                userCards.push({ name: user.name,bio:user.bio,image:user.img ,email:user.email})
+              //TODO:calc score 0 to 100
+              userCards.push(user)
+                // userCards.push({ name: user.name,bio:user.bio,image:user.img ,email:user.email,score:user.score})
              }
            }) 
 

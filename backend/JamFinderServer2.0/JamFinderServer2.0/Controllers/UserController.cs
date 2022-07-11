@@ -52,12 +52,13 @@ namespace JamfinderServer.Controllers
 
         }
 
+        [Route("user/addOrUpdateUser")]
         [HttpGet]
-        public IHttpActionResult addOrUpdateUser(string email, string name, string bio,string img,string height,string width,string ext,string hash)
+        public IHttpActionResult addOrUpdateUser(string email, string name, string bio,string img)
         {
-            string fullimg = img+ "&height=" + height+ "&width=" + width+ "&ext=" + ext+ "&hash=" + hash;
+            //string fullimg = img+ "&height=" + height+ "&width=" + width+ "&ext=" + ext+ "&hash=" + hash;
             User User = new User();
-            int likes = User.addOrUpdateUser(email, name, bio, fullimg);
+            int likes = User.addOrUpdateUser(email, name, bio, img);
             return Ok(likes);
         }
 
@@ -98,7 +99,7 @@ namespace JamfinderServer.Controllers
             User.addLike(user, targetUser);
             return Ok(User.checkMatch(user, targetUser));
         }
-
+        
 
         // PUT api/<controller>/5 for IMG
         [Route("updateuser")]

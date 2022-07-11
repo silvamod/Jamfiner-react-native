@@ -421,6 +421,8 @@ namespace JamFinderServer2._0.Models
         }
         public int addOrUpdateUser(string email, string name, string bio, string img)
         {
+            string setQuery = "";
+
             List<User> Users = getUsers();
             bool foundflag = false;
             foreach (User user in Users)
@@ -428,13 +430,17 @@ namespace JamFinderServer2._0.Models
                 if (user.email == email)
                 {
                     foundflag = true;
-                    if (user.name != name)
-                        this.name = name;
-                    if (user.bio != bio)
-                        this.bio = bio;
+                    //if (user.name != name)
+                    //if (user.bio != bio)
                     if (user.img != img)
-                        this.img = img;
+                    {
+                        UpdateUserImage(img, user.email);
+                    }
+                    //here
+
+
                 }
+
             }
             if (!foundflag)
             {
@@ -459,6 +465,7 @@ namespace JamFinderServer2._0.Models
             foreach (User user in users)
             {
                 //user.genger
+                //TODO: bring real gen from Database and change the format (hint : with spilt function)!
                 string[] gen = new string[] { "country rock", "danish metal", "chill pop", "pop rock", "british country" };
                 Users.Add(user.email, gen);
             }
@@ -540,6 +547,35 @@ namespace JamFinderServer2._0.Models
                 con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
 
                 String selectSTR = "UPDATE users SET genres = '" + genres + "' WHERE email='" + email + "'";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+                // get a reader
+                cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
+        }
+
+        public int UpdateUserImage(string img, string email)
+        {
+            SqlConnection con = null;
+
+            try
+            {
+                con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                
+                String selectSTR = "UPDATE Users SET img = '"+img+"' WHERE email = '" + email + "'";
                 SqlCommand cmd = new SqlCommand(selectSTR, con);
                 // get a reader
                 cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
