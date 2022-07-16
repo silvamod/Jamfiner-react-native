@@ -3,7 +3,7 @@ import { storeData } from "./storage";
 export const sendUserDataToBackEnd = async (data: any) => {
   await storeData("@email", data.email);
   console.log(data.images[0].url, "data.images[0].url");
-
+  //local test work and from remote server dont work
   fetch(
     //user/addOrUpdateUser
     `https://proj.ruppin.ac.il/bgroup63/test2/tar1/user/addOrUpdateUser?email=${data.email}&name=${data.display_name}&bio=new user from spotify :)&img=${data.images[0].url}`,
