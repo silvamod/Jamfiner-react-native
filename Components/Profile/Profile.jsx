@@ -5,6 +5,7 @@ import * as Location from 'expo-location';
 import { useEffect,useState } from 'react';
 import { getData } from '../../utils/storage';
 import { getUserGenresFromSpotify } from '../../utils/getUserGenresFromSpotify';
+import { ScrollView } from 'native-base';
 export default function Profile(props) {
 
   const [locationAl, setLocationAl] = useState(null);
@@ -98,9 +99,10 @@ export default function Profile(props) {
     <Popup name={user.name} email={user.email} setUser={setUser}/>
       <View>
       </View>
-      <Text style={styles.name}>{city}</Text>
       <Text style={styles.name}>{user.name}</Text>
-      <Text style={styles.bio}>Bio:{user.bio}</Text>
+      <Text style={styles.name}>{city}</Text>
+      <Text style={styles.textRegister}> ──────────────────────────────</Text>
+      <Text style={styles.bio}>Bio: {user.bio}</Text>
     </View>
     </>
   )}

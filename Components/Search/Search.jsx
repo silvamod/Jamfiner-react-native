@@ -292,6 +292,7 @@ function getLikes(){
       backgroundColor:'#fff',
       borderRadius:10,
       marginBottom:'35%',
+      marginTop:'20%'
 
     //   borderColor:'black',
     //   borderWidth:1,
