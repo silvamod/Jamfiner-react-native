@@ -16,7 +16,6 @@ function Card({ data }) {
         <Text style={styles.name}>{data.score}</Text>
         <Text style={styles.name}>{data.name}</Text>
         <Text style={styles.bio}>{data.bio}</Text>
-        <Text> img address : {data.img}</Text>
         </View>
       </View>
     );
