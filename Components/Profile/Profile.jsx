@@ -16,8 +16,6 @@ export default function Profile(props) {
 
 
   useEffect(() => {
-    console.log(locationLo)
-    console.log(locationAl)
     if(locationLo){
 
       new Promise((resolve) => {
@@ -49,7 +47,7 @@ export default function Profile(props) {
     }
   }, [locationLo])
 
-  useEffect(() => { //get loc
+  useEffect(() => { 
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
@@ -66,9 +64,7 @@ export default function Profile(props) {
 
   useEffect( async() => {
     const email = await getData('@email')
-    console.log('getData()',email)
     let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?email='+ email
-    console.log('apiUrl()',apiUrl)
 
    fetch(apiUrl, {
      method: 'GET',
@@ -82,7 +78,6 @@ export default function Profile(props) {
      })
      .then(
        (result) => {
-         console.log("fetch img= ", result);
         setUser(result)
         if(result.isAdmin == 1){
           props.setisAdmin(true)
@@ -98,9 +93,8 @@ export default function Profile(props) {
  if(user){
   return (
     <>
-
     <View style={styles.container}>
-    <Image style={styles.image} source={{uri:user.img, width:'100%',height:200 }}/>
+    <Image style={styles.image} source={{uri:user.img, width:'100%',height:230}}/>
     <Popup name={user.name} email={user.email} setUser={setUser}/>
       <View>
       </View>
@@ -108,8 +102,6 @@ export default function Profile(props) {
       <Text style={styles.name}>{user.name}</Text>
       <Text style={styles.bio}>Bio:{user.bio}</Text>
     </View>
-
-
     </>
   )}
   return (<View><Text>Loading ..</Text></View>)
@@ -134,7 +126,7 @@ const styles = StyleSheet.create({
     paddingBottom:'2%'
   },
   image:{
-
+    resizeMode:'stretch'
   },
   name:{
     marginTop:10,
