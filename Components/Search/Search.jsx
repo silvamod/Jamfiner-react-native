@@ -10,12 +10,13 @@ function Card({ data }) {
     return (
         
         <View style={styles.card}>
-        <ImageBackground source={{uri:data.image}} style={styles.image}>
+        <ImageBackground source={{uri:data.img}} style={styles.image}>
         </ImageBackground>
         <View>
         <Text style={styles.name}>{data.score}</Text>
         <Text style={styles.name}>{data.name}</Text>
         <Text style={styles.bio}>{data.bio}</Text>
+        <Text> img address : {data.img}</Text>
         </View>
       </View>
     );
