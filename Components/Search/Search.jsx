@@ -140,7 +140,7 @@ function getLikes(){
 }
 
   
-    function postMatch(user, targetUser){
+    function postMatch(user, targetUser){//send score between two users.
       let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?match1='+user+'&match2='+targetUser
       fetch(apiUrl, {
         method: 'POST',

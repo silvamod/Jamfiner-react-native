@@ -30,10 +30,35 @@ namespace JamFinderServer2._0.Models
             this.selectedItems = selectedItems;
         }
 
+        //updates settings of a specified user email in the database.
         public Setting upDateSttings(Setting setting)
         {
-            Console.WriteLine(setting);
-            return setting;
+            SqlConnection con = null;
+
+            try
+            {
+                (skill, instruments, miles, male, female)
+                  con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+
+                String selectSTR = "UPDATE settings SET skill='"+ setting.skill+"' miles='"+setting.miles+"' instruments='"+setting.selectedItems+"' male='"+setting.male+"' female='"+setting.female+"' WHERE email='"+setting.email+"'";
+                SqlCommand cmd = new SqlCommand(selectSTR, con);
+                // get a reader
+                cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+
+            }
         }
 
     }
