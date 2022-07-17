@@ -61,6 +61,7 @@ namespace JamFinderServer2._0.Models
         public List<string[]> getAllMatches()
         {
             SqlConnection con = null;
+            List<User> users = new List<User>();
             List<string[]> MatchList = new List<string[]>();
 
             try
@@ -75,9 +76,11 @@ namespace JamFinderServer2._0.Models
 
                 while (dr.Read())
                 {   // Read till the end of the data into a 
-                    string[] like = new string[2];
+                    string[] like = new string[4];
                     like[0] = (string)dr["user1"];
                     like[1] = (string)dr["user2"];
+                    like[2] = (string)dr["score"];
+                    like[3] = getMutualGenres(users, like[0], like[1]);
                     MatchList.Add(like);
                 }
                 //TODO: Print result
@@ -98,6 +101,25 @@ namespace JamFinderServer2._0.Models
             }
 
         }
+
+        public string getMutualGenres(List<User> users, string targetuser1,string targetuser2)
+        {
+            User user1;
+            User user2;
+            for(int i=0; i<users.Count; i++)
+            {
+                if (string.Equals(users[i].email, targetuser1))
+                    user1 = users[i];
+                if (string.Equals(users[i].email, targetuser2))
+                    user1 = users[i];
+            }
+            if(user1 && user2)
+            {
+                return user1.genres.Split(',').Intersect(user2.genres.Split(','));
+            }
+
+        }
+
         public List<string[]> getLikes()
         {
             SqlConnection con = null;
@@ -279,7 +301,9 @@ namespace JamFinderServer2._0.Models
             }
 
         }
-        public int addMatch(string match1, string match2)
+
+        //adds 2 users into match table containing their emails and matching score.
+        public int addMatch(string match1, string match2,float score)
         {
             SqlConnection con = null;
 
@@ -287,8 +311,8 @@ namespace JamFinderServer2._0.Models
             {
                 con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
 
-                String selectSTR = "INSERT INTO matches (user1,user2) VALUES ('" + match1 + "','" + match2 + "') " +
-                    "INSERT INTO matches (user1,user2) VALUES ('" + match2 + "','" + match1 + "') ";
+                String selectSTR = "INSERT INTO matches (user1,user2,score) VALUES ('" + match1 + "','" + match2 +"','"+score+ "') " +
+                    "INSERT INTO matches (user1,user2,score) VALUES ('" + match2 + "','" + match1 + "','" + score + "') ";
                 SqlCommand cmd = new SqlCommand(selectSTR, con);
                 // get a reader
                 cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
@@ -619,6 +643,7 @@ namespace JamFinderServer2._0.Models
                     user.location = (string)dr["location"];
                     user.bio = (string)dr["bio"];
                     user.img = (string)dr["img"];
+                    user.genres = (string)dr["genres"];
                     UserList.Add(user);
                 }
                 //TODO: Print result
