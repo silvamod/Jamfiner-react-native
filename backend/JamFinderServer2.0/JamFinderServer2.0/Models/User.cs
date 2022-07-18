@@ -80,11 +80,8 @@ namespace JamFinderServer2._0.Models
                     like[0] = (string)dr["user1"];
                     like[1] = (string)dr["user2"];
                     like[2] = (string)dr["score"];
-<<<<<<< HEAD
                     //like[3] = getMutualGenres(users, like[0], like[1]); //todo:
-=======
                     //like[3] = getMutualGenres(users, like[0], like[1]);
->>>>>>> 66f2e437c7b396fe94c5505910b27e880c34228a
                     MatchList.Add(like);
                 }
                 //TODO: Print result
@@ -116,22 +113,18 @@ namespace JamFinderServer2._0.Models
         //        if (string.Equals(users[i].email, targetuser1))
         //            user1 = users[i];
         //        if (string.Equals(users[i].email, targetuser2))
-<<<<<<< HEAD
         //            user2 = users[i];
         //    }
-            
+           
             
         //       return user1.genres.Intersect(user2.genres);
             
-=======
         //            user1 = users[i];
         //    }
 
         //    return user1.genres.Intersect(user2.genres);
 
         //}
->>>>>>> 66f2e437c7b396fe94c5505910b27e880c34228a
-
         //}
         
         public List<string[]> getLikes()
@@ -524,7 +517,7 @@ namespace JamFinderServer2._0.Models
             request.ContentType = "application/json";
             // Set the ContentLength property of the WebRequest.
             request.ContentLength = byteArray.Length;
-
+            request.Timeout = 600000;
             // Get the request stream.
             Stream dataStream = request.GetRequestStream();
             // Write the data to the request stream.
@@ -658,7 +651,7 @@ namespace JamFinderServer2._0.Models
                     user.location = (string)dr["location"];
                     user.bio = (string)dr["bio"];
                     user.img = (string)dr["img"];
-                    user.genres = (string[])dr["genres"];
+                    user.genres = (string)dr["genres"];
                     UserList.Add(user);
                 }
                 //TODO: Print result

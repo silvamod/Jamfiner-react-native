@@ -56,24 +56,20 @@ namespace JamFinderServer2._0.Models
         //{
         //    SqlConnection con = null;
 
-<<<<<<< HEAD
         //    try
         //    {
         //        (skill, instruments, miles, male, female)
         //          con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
-=======
-            try
-            {
+            //try
+            //{
            
-                  con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
->>>>>>> 66f2e437c7b396fe94c5505910b27e880c34228a
+            //      con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
 
         //        String selectSTR = "UPDATE settings SET skill='"+ setting.skill+"' miles='"+setting.miles+"' instruments='"+setting.selectedItems+"' male='"+setting.male+"' female='"+setting.female+"' WHERE email='"+setting.email+"'";
         //        SqlCommand cmd = new SqlCommand(selectSTR, con);
         //        // get a reader
         //        cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);  // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
 
-<<<<<<< HEAD
         //    }
         //    catch (Exception ex)
         //    {
@@ -89,24 +85,22 @@ namespace JamFinderServer2._0.Models
 
         //    }
         //}
-=======
-            }
-            catch (Exception ex)
-            {
-                // write to log0
-                throw (ex);
-            }
-            finally
-            {
-                if (con != null)
-                {
-                    con.Close();
-                }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // write to log0
+        //        throw (ex);
+        //    }
+        //    finally
+        //    {
+        //        if (con != null)
+        //        {
+        //            con.Close();
+        //        }
 
-            }
-            return setting;
-        }
->>>>>>> 66f2e437c7b396fe94c5505910b27e880c34228a
+        //    }
+        //    return setting;
+        //}
 
     }
 }

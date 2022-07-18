@@ -10,7 +10,7 @@ function Card({ data }) {
     return (
         
         <View style={styles.card}>
-        <ImageBackground source={{uri:data.img}} style={styles.image}>
+        <ImageBackground source={{uri:data.image}} style={styles.image}>
         </ImageBackground>
         <View>
         <Text style={styles.name}>{data.score}</Text>
@@ -56,8 +56,9 @@ export default function Search(props) {
     }, [sound]);
 
 
-    useEffect(() => {
-      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?userLike=' + props.username
+    useEffect( async() => {
+      email = await getData('@email')
+      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?userLike=' +email
       fetch(apiUrl, {
         method: 'GET',
         headers: new Headers({
@@ -74,13 +75,14 @@ export default function Search(props) {
             }) 
           ,
           (error) => {
-            console.log("err get=", error);
+            console.log("userLike err get=", error);
           };
    }, []);
 
     useEffect(async() => {
       email = await getData('@email')
       console.log('email!!',email)
+      if(likes){
       let apiUrl = `https://proj.ruppin.ac.il/bgroup63/test2/tar1/user/getSearchedUsers?targetUser=${email}`
      fetch(apiUrl, {
        method: 'GET',
@@ -90,16 +92,19 @@ export default function Search(props) {
        })
      })
        .then(res => {
+        console.log('we in the first res ===>>',res);
          return res.json()
        })
        .then(
          (result) => {
           console.log('result',result)
+          console.log('likes',likes)
            const userCards = []
            result.map(user => {
-             if(user.email != email  & !likes.includes(user.email)){
+             if(user.email != email & !likes.includes(user.email)){
               //TODO:calc score 0 to 100
-              userCards.push(user)
+              console.log('LOG 1' ,{ name: user.name,bio:user.bio,image:user.img ,email:user.email,score:user.score});
+              userCards.push({ name: user.name,bio:user.bio,image:user.img ,email:user.email,score:user.score})
                 // userCards.push({ name: user.name,bio:user.bio,image:user.img ,email:user.email,score:user.score})
              }
            }) 
@@ -108,13 +113,14 @@ export default function Search(props) {
             const j = Math.floor(Math.random() * (i + 1));
             [userCards[i], userCards[j]] = [userCards[j], userCards[i]];
         }
+        console.log('LOG 2');
            setCards(userCards)
           // setUser(result)
          },
          (error) => {
-           console.log("err get=", error);
+           console.log(" getSearchedUsers err get=", error);
          });
-   }, [likes]);
+   }}, [likes]);
   
 function getLikes(){
   let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?userLike=' + props.username
@@ -135,7 +141,7 @@ function getLikes(){
         }) 
       ,
       (error) => {
-        console.log("err get=", error);
+        console.log("FUNCTION => getLikes err get=", error);
       };
 }
 
@@ -159,13 +165,14 @@ function getLikes(){
            playSound()
           },
           (error) => {
-            console.log("err get=", error);
+            console.log("postMatch err get=", error);
           });
     }
 
 
-    function handleYup(card) {
-      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?user='+props.username+'&targetUser='+card.email
+    async function handleYup (card) {
+      email = await getData('@email')
+      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?user='+email+'&targetUser='+card.email
       console.log(apiUrl)
       fetch(apiUrl, {
         method: 'POST',
@@ -184,7 +191,7 @@ function getLikes(){
             }
           },
           (error) => {
-            console.log("err get=", error);
+            console.log("handleYup err get=", error);
           });
       return true; // return false if you wish to cancel the action
     }
