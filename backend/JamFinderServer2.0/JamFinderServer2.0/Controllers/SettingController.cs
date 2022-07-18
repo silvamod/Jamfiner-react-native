@@ -27,7 +27,7 @@ namespace JamFinderServer2._0.Controllers
         public Setting Post([FromBody] Setting value)
         {
             Setting setting = new Setting();
-            return setting.upDateSttings(value);
+            return setting;/*.upDateSttings(value);*/
         }
 
         // PUT api/<controller>/5
