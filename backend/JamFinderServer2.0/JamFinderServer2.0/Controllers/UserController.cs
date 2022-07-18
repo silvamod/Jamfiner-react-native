@@ -89,7 +89,7 @@ namespace JamfinderServer.Controllers
         public IHttpActionResult PostMatch(string match1, string match2, float score)
         {
             User User = new User();
-            return Ok(User.addMatch(match1, match2));
+            return Ok(User.addMatch(match1, match2,score));
         }
 
         // POST api/<controller>
@@ -123,6 +123,10 @@ namespace JamfinderServer.Controllers
         [HttpGet]
         public IHttpActionResult addUserGenres(string targetUser, string genres)
         {
+            //ignoring un-updated genres
+            genres = genres.Replace("israeli mediterranean", "pop");
+            genres = genres.Replace("meditation", "pop");
+            genres = genres.Replace("poprock", "pop");
             User User = new User();
             return Ok(User.AddGenresToUser(genres, targetUser));
 
