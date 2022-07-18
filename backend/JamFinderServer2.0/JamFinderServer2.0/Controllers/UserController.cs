@@ -127,6 +127,7 @@ namespace JamfinderServer.Controllers
             genres = genres.Replace("israeli mediterranean", "pop");
             genres = genres.Replace("meditation", "pop");
             genres = genres.Replace("poprock", "pop");
+            genres = genres.Replace("mizrachi", "pop");
             User User = new User();
             return Ok(User.AddGenresToUser(genres, targetUser));
 
