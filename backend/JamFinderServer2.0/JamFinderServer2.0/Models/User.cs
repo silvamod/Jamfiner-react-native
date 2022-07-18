@@ -80,7 +80,7 @@ namespace JamFinderServer2._0.Models
                     like[0] = (string)dr["user1"];
                     like[1] = (string)dr["user2"];
                     like[2] = (string)dr["score"];
-                    like[3] = getMutualGenres(users, like[0], like[1]);
+                    //like[3] = getMutualGenres(users, like[0], like[1]);
                     MatchList.Add(like);
                 }
                 //TODO: Print result
@@ -102,23 +102,21 @@ namespace JamFinderServer2._0.Models
 
         }
 
-        public string getMutualGenres(List<User> users, string targetuser1,string targetuser2)
-        {
-            User user1;
-            User user2;
-            for(int i=0; i<users.Count; i++)
-            {
-                if (string.Equals(users[i].email, targetuser1))
-                    user1 = users[i];
-                if (string.Equals(users[i].email, targetuser2))
-                    user1 = users[i];
-            }
-            if(user1 && user2)
-            {
-                return user1.genres.Split(',').Intersect(user2.genres.Split(','));
-            }
+        //public string getMutualGenres(List<User> users, string targetuser1,string targetuser2)
+        //{
+        //    User user1 = new User();
+        //    User user2 = new User();
+        //    for (int i=0; i<users.Count; i++)
+        //    {
+        //        if (string.Equals(users[i].email, targetuser1))
+        //            user1 = users[i];
+        //        if (string.Equals(users[i].email, targetuser2))
+        //            user1 = users[i];
+        //    }
 
-        }
+        //    return user1.genres.Intersect(user2.genres);
+
+        //}
 
         public List<string[]> getLikes()
         {
@@ -643,7 +641,7 @@ namespace JamFinderServer2._0.Models
                     user.location = (string)dr["location"];
                     user.bio = (string)dr["bio"];
                     user.img = (string)dr["img"];
-                    user.genres = (string)dr["genres"];
+                    user.genres = (string[])dr["genres"];
                     UserList.Add(user);
                 }
                 //TODO: Print result

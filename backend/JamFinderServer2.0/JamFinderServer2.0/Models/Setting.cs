@@ -1,7 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
+
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Web.Configuration;
+using System.Text.Json.Serialization;
+using System.Collections;
+using System.Reflection;
+using Newtonsoft.Json.Linq;
+
 
 namespace JamFinderServer2._0.Models
 {
@@ -29,6 +41,14 @@ namespace JamFinderServer2._0.Models
             this.female = female;
             this.selectedItems = selectedItems;
         }
+        public SqlConnection connect(String conString)
+        {
+            // read the connection string from the configuration file
+            string cStr = WebConfigurationManager.ConnectionStrings[conString].ConnectionString;
+            SqlConnection con = new SqlConnection(cStr);
+            con.Open();
+            return con;
+        }
 
         //updates settings of a specified user email in the database.
         public Setting upDateSttings(Setting setting)
@@ -37,7 +57,7 @@ namespace JamFinderServer2._0.Models
 
             try
             {
-                (skill, instruments, miles, male, female)
+           
                   con = connect("DBConnectionString"); // create a connection to the database using the connection String defined in the web config file
 
                 String selectSTR = "UPDATE settings SET skill='"+ setting.skill+"' miles='"+setting.miles+"' instruments='"+setting.selectedItems+"' male='"+setting.male+"' female='"+setting.female+"' WHERE email='"+setting.email+"'";
@@ -48,7 +68,7 @@ namespace JamFinderServer2._0.Models
             }
             catch (Exception ex)
             {
-                // write to log
+                // write to log0
                 throw (ex);
             }
             finally
@@ -59,6 +79,7 @@ namespace JamFinderServer2._0.Models
                 }
 
             }
+            return setting;
         }
 
     }
