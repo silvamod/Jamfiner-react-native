@@ -79,7 +79,9 @@ namespace JamFinderServer2._0.Models
                     string[] like = new string[4];
                     like[0] = (string)dr["user1"];
                     like[1] = (string)dr["user2"];
-                    like[2] = (string)dr["score"];
+                    //var Date = Convert.ToDateTime(reader["YOUR_DATE_COLUMN"]);
+                    //var Time = (TimeSpan)reader["YOUR_TIME_COLUMN"];
+                    like[2] = Convert.ToString(dr["score"]);
                     //like[3] = getMutualGenres(users, like[0], like[1]); //todo:
                     //like[3] = getMutualGenres(users, like[0], like[1]);
                     MatchList.Add(like);
