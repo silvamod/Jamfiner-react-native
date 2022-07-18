@@ -20,7 +20,7 @@ namespace JamFinderServer2._0.Models
     {
         public string email { get; set; }
         public string name { get; set; }
-        public string[] genres { get; set; }
+        public string genres { get; set; }
         public string profession { get; set; }
         public int experience { get; set; }
         public string location { get; set; }
@@ -80,7 +80,11 @@ namespace JamFinderServer2._0.Models
                     like[0] = (string)dr["user1"];
                     like[1] = (string)dr["user2"];
                     like[2] = (string)dr["score"];
+<<<<<<< HEAD
+                    //like[3] = getMutualGenres(users, like[0], like[1]); //todo:
+=======
                     //like[3] = getMutualGenres(users, like[0], like[1]);
+>>>>>>> 66f2e437c7b396fe94c5505910b27e880c34228a
                     MatchList.Add(like);
                 }
                 //TODO: Print result
@@ -101,6 +105,7 @@ namespace JamFinderServer2._0.Models
             }
 
         }
+        //todo:
 
         //public string getMutualGenres(List<User> users, string targetuser1,string targetuser2)
         //{
@@ -111,13 +116,24 @@ namespace JamFinderServer2._0.Models
         //        if (string.Equals(users[i].email, targetuser1))
         //            user1 = users[i];
         //        if (string.Equals(users[i].email, targetuser2))
+<<<<<<< HEAD
+        //            user2 = users[i];
+        //    }
+            
+            
+        //       return user1.genres.Intersect(user2.genres);
+            
+=======
         //            user1 = users[i];
         //    }
 
         //    return user1.genres.Intersect(user2.genres);
 
         //}
+>>>>>>> 66f2e437c7b396fe94c5505910b27e880c34228a
 
+        //}
+        
         public List<string[]> getLikes()
         {
             SqlConnection con = null;
@@ -301,7 +317,8 @@ namespace JamFinderServer2._0.Models
         }
 
         //adds 2 users into match table containing their emails and matching score.
-        public int addMatch(string match1, string match2,float score)
+        //TODO::
+        public int addMatch(string match1, string match2/*,float score*/)
         {
             SqlConnection con = null;
 
@@ -489,7 +506,7 @@ namespace JamFinderServer2._0.Models
                 //user.genger
                 //TODO: bring real gen from Database and change the format (hint : with spilt function)!
                 string[] gen = new string[] { "country rock", "danish metal", "chill pop", "pop rock", "british country" };
-                Users.Add(user.email, gen);
+                Users.Add(user.email, user.genres.Split(','));
             }
 
             var jsonobj = new Dictionary<string, Dictionary<string, string[]>>
