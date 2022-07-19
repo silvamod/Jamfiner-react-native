@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
 import * as WebBrowser from 'expo-web-browser';
 import { ResponseType, useAuthRequest } from "expo-auth-session";
-import { Button } from 'react-native';
+import { Button,Pressable ,StyleSheet,Text,Image} from 'react-native';
 import {storeData,getData} from '../../utils/storage'
 import {getUserDataFromSpotify} from '../../utils/getUserDataFromSpotify'
 import {getUserGenresFromSpotify} from '../../utils/getUserGenresFromSpotify'
+import { View } from "native-base";
+
+import { AwesomeButton } from "react-awesome-button";
+
 WebBrowser.maybeCompleteAuthSession();
 
 // Endpoint
@@ -78,12 +82,47 @@ export default function SpotifyLogin(props) {
       }, [response]);
 
   return (
+    <Pressable style={styles.button} onPress={promptAsync}>
+    <Text style={styles.text}>Login via Spotify</Text>
+    <Image style={styles.tinyLogo} source={require('../../assets/images/spotify-black-icon-348155-removebg-preview.png')}></Image>
     <Button
       disabled={!request}
-      title="Login via Spotify"
+      title=''
       onPress={() => {
         promptAsync();
         }}
     />
+
+    </Pressable>
+    
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    display: 'flex',
+    flexDirection:'row',
+    height: 60,
+    width: 250,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: '#1db954',
+    
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: '#000',
+    marginLeft:35,
+  },
+  tinyLogo:{
+    height: 80,
+    width: 80,
+  }
+});

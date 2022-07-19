@@ -89,7 +89,7 @@ namespace JamfinderServer.Controllers
         public IHttpActionResult PostMatch(string match1, string match2, float score)
         {
             User User = new User();
-            return Ok(User.addMatch(match1, match2));
+            return Ok(User.addMatch(match1, match2,score));
         }
 
         // POST api/<controller>

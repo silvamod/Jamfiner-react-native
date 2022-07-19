@@ -313,7 +313,7 @@ namespace JamFinderServer2._0.Models
 
         //adds 2 users into match table containing their emails and matching score.
         //TODO::
-        public int addMatch(string match1, string match2/*,float score*/)
+        public int addMatch(string match1, string match2, float score)
         {
             SqlConnection con = null;
 

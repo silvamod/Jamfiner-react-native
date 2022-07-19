@@ -76,7 +76,7 @@ export default function Settings() {
     <>
       <View style={styles.container}>
         <View style={styles.multiselectdemocontainer}>
-          <Text style={{ fontSize: 20, paddingBottom: 10 }}>Instruments</Text>
+          <Text style={{ fontSize: 20, paddingBottom: 20 }}>Instruments</Text>
           <SelectBox
             label="Select Instruments"
             options={K_OPTIONS}
@@ -97,7 +97,7 @@ export default function Settings() {
             fontSize: 20,
             fontWeight: "600",
             justifyContent: "center",
-            paddingTop: 10,
+            paddingTop: 50,
           }}
         >
           {settings.miles} Miles
@@ -107,7 +107,7 @@ export default function Settings() {
           minimumValue={0}
           maximumValue={300}
           minimumTrackTintColor="#000"
-          maximumTrackTintColor="#fff"
+          maximumTrackTintColor="#b6b6b6"
           thumbTintColor="#000"
           onValueChange={(val) => {
             setSettings((prevState) => ({
@@ -126,7 +126,7 @@ export default function Settings() {
           minimumValue={0}
           maximumValue={4}
           minimumTrackTintColor="#000"
-          maximumTrackTintColor="#fff"
+          maximumTrackTintColor="#b6b6b6"
           thumbTintColor="#000"
           onValueChange={(val) => {
             setSettings((prevState) => ({
@@ -181,13 +181,13 @@ export default function Settings() {
             width={200}
             backgroundDarker={"#191414"}
             textColor={"#fff"}
-            style={{ marginTop: 10 }}
+            style={{ marginTop: 90 ,marginLeft:120}}
             textSize={22}
           >
             Save
           </AwesomeButton>
 
-          <AwesomeButton
+          {/* <AwesomeButton
             onPress={() => {
               console.log(settings);
             }}
@@ -199,7 +199,7 @@ export default function Settings() {
             textSize={22}
           >
             print
-          </AwesomeButton>
+          </AwesomeButton> */}
         </View>
       </View>
     </>
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "flex-start",
-    backgroundColor: "#90E0EF",
+    backgroundColor: "#FFF",
     justifyContent: "flex-start",
     padding: 5,
   },
