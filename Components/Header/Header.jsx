@@ -5,8 +5,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Header(props) {
 
   return (
-    <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between',alignItems:"center",height:100,backgroundColor:'#0077b6'}}>
-      <Image style={{height:44,width:300,marginTop:30,marginLeft:-60}} source={require("../../assets/images/logo-removebg-preview__3_-removebg-preview.png")}/>
+    <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between',alignItems:"center",height:100,backgroundColor:'#ffffff92'}}>
+      <Image style={{height:55,width:200,marginTop:50}} source={require("../../assets/images/new_logo.png")}/>
     <Pressable onPress={()=>{
        AsyncStorage.removeItem('@access_token').then(()=>{
         props.userAuthOK(1)

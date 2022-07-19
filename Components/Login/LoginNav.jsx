@@ -17,7 +17,7 @@ export default function LoginNav(props) {
         name="Welcome"
         children={()=><FrontScreen userAuthOK={props.userAuthOK} upDateUserName={props.upDateUserName}/>}
         options={{          headerStyle: {
-          backgroundColor: '#90E0EF',
+          backgroundColor: '#ffffff92',
         },}}
       />
       <Stack.Screen

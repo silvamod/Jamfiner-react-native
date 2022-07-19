@@ -13,9 +13,9 @@ function Card({ data }) {
         <ImageBackground source={{uri:data.image}} style={styles.image}>
         </ImageBackground>
         <View>
-        <Text style={styles.name}>{data.score}</Text>
         <Text style={styles.name}>{data.name}</Text>
         <Text style={styles.bio}>{data.bio}</Text>
+        <Text style={styles.score}>{data.score.toFixed(1)} %</Text>
         </View>
       </View>
     );
@@ -33,6 +33,7 @@ export default function Search(props) {
     const [cards, setCards] = useState();
     const [likes, setLikes] = useState();
     const [sound, setSound] = useState();
+  
 
     const likebtn = useRef()
 
@@ -97,14 +98,16 @@ export default function Search(props) {
        })
        .then(
          (result) => {
+          const highestMaxScore = Math.max(...result.map(member => member.score));
           console.log('result',result)
           console.log('likes',likes)
            const userCards = []
            result.map(user => {
              if(user.email != email & !likes.includes(user.email)){
               //TODO:calc score 0 to 100
+
               console.log('LOG 1' ,{ name: user.name,bio:user.bio,image:user.img ,email:user.email,score:user.score});
-              userCards.push({ name: user.name,bio:user.bio,image:user.img ,email:user.email,score:user.score})
+              userCards.push({ name: user.name,bio:user.bio,image:user.img ,email:user.email,score:(user.score/highestMaxScore*100)})
                 // userCards.push({ name: user.name,bio:user.bio,image:user.img ,email:user.email,score:user.score})
              }
            }) 
@@ -145,9 +148,9 @@ function getLikes(){
       };
 }
 
-  
-    function postMatch(user, targetUser){//send score between two users.
-      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?match1='+user+'&match2='+targetUser
+  //20/7
+    function postMatch(user, targetUser,score){//send score between two users.
+      let apiUrl = 'https://proj.ruppin.ac.il/bgroup63/test2/tar1/api/user?match1='+user+'&match2='+targetUser+'&score='+score
       fetch(apiUrl, {
         method: 'POST',
         headers: new Headers({
@@ -187,7 +190,7 @@ function getLikes(){
         .then(
           (result) => {
             if(result == 1){ //MATCH!!$!!
-              postMatch(props.username, card.email)
+              postMatch(props.username, card.email,card.score)
             }
           },
           (error) => {
@@ -243,7 +246,7 @@ function getLikes(){
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#90E0EF",
+      backgroundColor: "#79737345",
       alignItems: "center",
       justifyContent: "center",
       zIndex:1
@@ -265,10 +268,18 @@ function getLikes(){
         marginLeft:10,
         fontSize:20,
         fontWeight:'bold',
-    },
+    }, 
+       score:{
+      // backgroundColor:'blue'
+      fontSize:20,
+      fontWeight:'bold',
+      color:'#4ac24a',
+      marginBottom:20,
+      marginLeft:10,
+  },
+
     bio:{
         marginTop:10,
-        marginLeft:10,
         marginBottom:10,
         padding:10,
 
